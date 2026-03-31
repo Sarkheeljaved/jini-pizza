@@ -1,0 +1,73 @@
+{
+  "name": "GroupOrder",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Group name e.g. Office Lunch"
+    },
+    "host_name": {
+      "type": "string"
+    },
+    "host_email": {
+      "type": "string"
+    },
+    "share_code": {
+      "type": "string",
+      "description": "Short code to join"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "open",
+        "locked",
+        "placed",
+        "cancelled"
+      ],
+      "default": "open"
+    },
+    "order_type": {
+      "type": "string",
+      "enum": [
+        "delivery",
+        "pickup"
+      ],
+      "default": "delivery"
+    },
+    "delivery_address": {
+      "type": "string"
+    },
+    "members": {
+      "type": "array",
+      "description": "Members and their items",
+      "items": {
+        "type": "object",
+        "properties": {
+          "member_name": {
+            "type": "string"
+          },
+          "member_email": {
+            "type": "string"
+          },
+          "items": {
+            "type": "array"
+          },
+          "subtotal": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "total_amount": {
+      "type": "number"
+    },
+    "notes": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "name",
+    "host_name",
+    "share_code"
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "name": "Product",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Product name"
+    },
+    "description": {
+      "type": "string",
+      "description": "Product description"
+    },
+    "price": {
+      "type": "number",
+      "description": "Price in dollars"
+    },
+    "image_url": {
+      "type": "string",
+      "description": "Product image URL"
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "burgers",
+        "pizzas",
+        "sides",
+        "drinks",
+        "desserts",
+        "combos"
+      ],
+      "description": "Product category"
+    },
+    "is_featured": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether product is featured"
+    },
+    "is_available": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether product is currently available"
+    },
+    "spice_level": {
+      "type": "string",
+      "enum": [
+        "mild",
+        "medium",
+        "hot",
+        "extra_hot"
+      ],
+      "description": "Spice level"
+    },
+    "calories": {
+      "type": "number",
+      "description": "Calorie count"
+    },
+    "prep_time_mins": {
+      "type": "number",
+      "description": "Preparation time in minutes"
+    }
+  },
+  "required": [
+    "name",
+    "price",
+    "category"
+  ]
+}

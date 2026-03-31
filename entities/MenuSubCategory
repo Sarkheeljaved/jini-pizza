@@ -1,0 +1,102 @@
+{
+  "name": "MenuSubCategory",
+  "type": "object",
+  "properties": {
+    "category_id": {
+      "type": "string",
+      "description": "Parent MenuCategory ID"
+    },
+    "name": {
+      "type": "string",
+      "description": "Sub-category name e.g. Margherita 16 inch"
+    },
+    "description": {
+      "type": "string",
+      "description": "e.g. Served with cheese and mayo"
+    },
+    "base_price": {
+      "type": "number"
+    },
+    "image_url": {
+      "type": "string"
+    },
+    "sort_order": {
+      "type": "number",
+      "default": 0
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": true
+    },
+    "base_options": {
+      "type": "array",
+      "description": "Required selection groups e.g. crust type",
+      "items": {
+        "type": "object",
+        "properties": {
+          "group_name": {
+            "type": "string"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "select_type": {
+            "type": "string",
+            "enum": [
+              "single",
+              "multiple"
+            ]
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "extra_price": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "topping_groups": {
+      "type": "array",
+      "description": "Optional toppings/extras",
+      "items": {
+        "type": "object",
+        "properties": {
+          "group_name": {
+            "type": "string"
+          },
+          "max_selections": {
+            "type": "number"
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "extra_price": {
+                  "type": "number"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "required": [
+    "category_id",
+    "name",
+    "base_price"
+  ]
+}
