@@ -2,6 +2,8 @@
 .env
 .env.*
 
+#srver
+server
 # Logs
 /logs
 *.log

@@ -44,10 +44,10 @@ export default function RecommendedSection({ products, wishlistIds, onAddToCart,
               <h3 className="font-semibold text-sm leading-tight mb-1">{p.name}</h3>
               <div className="flex items-center justify-between">
                 <span className="font-bold text-primary">${p.price?.toFixed(2)}</span>
-                <Button size="sm" className="h-7 text-xs px-3 gap-1" onClick={() => onAddToCart(p)}>
+                <button className="h-7 text-xs px-3 gap-1 flex items-center bg-primary text-white rounded hover:bg-primary/90 transition-colors" onClick={() => onAddToCart(p)}>
                   <ShoppingCart className="w-3 h-3" />
                   Add
-                </Button>
+                </button>
               </div>
             </div>
           </motion.div>

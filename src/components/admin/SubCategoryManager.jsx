@@ -77,7 +77,7 @@ export default function SubCategoryManager({ categoryId, categoryName }) {
           <div className="space-y-4 mt-2">
             <div className="grid grid-cols-2 gap-4">
               <div><Label>Name *</Label><Input value={form.name} onChange={e => setForm(p => ({ ...p, name: e.target.value }))} className="mt-1.5" placeholder="e.g. Margherita 16 inch" /></div>
-              <div><Label>Base Price ($) *</Label><Input type="number" step="0.01" value={form.base_price} onChange={e => setForm(p => ({ ...p, base_price: e.target.value }))} className="mt-1.5" /></div>
+              <div><Label>Base Price (e) *</Label><Input type="number" step="0.01" value={form.base_price} onChange={e => setForm(p => ({ ...p, base_price: e.target.value }))} className="mt-1.5" /></div>
             </div>
             <div><Label>Description</Label><Textarea value={form.description} onChange={e => setForm(p => ({ ...p, description: e.target.value }))} className="mt-1.5" placeholder="e.g. Served with cheese and mayo" /></div>
             <div className="grid grid-cols-2 gap-4">

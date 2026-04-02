@@ -10,10 +10,15 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-9 h-9 bg-primary rounded-xl flex items-center justify-center">
+              {/* <div className="w-9 h-9 bg-primary rounded-xl flex items-center justify-center">
                 <Flame className="w-5 h-5 text-white" />
               </div>
-              <span className="font-heading font-bold text-lg">Jini<span className="text-primary">Pizza</span></span>
+              <span className="font-heading font-bold text-lg">Jini<span className="text-primary">Pizza</span></span> */}
+               <img
+              className="w-40 h-30 bg-none rounded-xl flex items-center justify-center"
+              src="/logo-brand-name-jinipizza-removebg-preview.png"
+              alt=""
+            />
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed">
               Fresh ingredients, bold flavors, blazing fast delivery. Your favorite fast food, just a tap away.
@@ -38,22 +43,22 @@ export default function Footer() {
           </div>
 
           {/* Help */}
-          <div>
+          {/* <div>
             <h4 className="font-heading font-bold mb-4">Help & Info</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               {['Track Order', 'FAQs', 'Allergen Info', 'Privacy Policy', 'Terms of Service'].map(item => (
                 <li key={item}><span className="hover:text-primary transition-colors cursor-pointer">{item}</span></li>
               ))}
             </ul>
-          </div>
+          </div> */}
 
           {/* Contact */}
           <div>
             <h4 className="font-heading font-bold mb-4">Contact Us</h4>
             <ul className="space-y-3 text-sm text-muted-foreground">
-              <li className="flex items-start gap-2"><MapPin className="w-4 h-4 mt-0.5 text-primary flex-shrink-0" /><span>123 Jini Street, Food District, NY 10001</span></li>
-              <li className="flex items-center gap-2"><Phone className="w-4 h-4 text-primary flex-shrink-0" /><span>+1 (800) Jini-IT</span></li>
-              <li className="flex items-center gap-2"><Mail className="w-4 h-4 text-primary flex-shrink-0" /><span>hello@JiniPizza.com</span></li>
+              <li className="flex items-start gap-2"><MapPin className="w-4 h-4 mt-0.5 text-primary flex-shrink-0" /><span>89 City Rd, Cardiff, CF24 3BN</span></li>
+              <li className="flex items-center gap-2"><Phone className="w-4 h-4 text-primary flex-shrink-0" /><span>029 2048 4705</span></li>
+              {/* <li className="flex items-center gap-2"><Mail className="w-4 h-4 text-primary flex-shrink-0" /><span>hello@JiniPizza.com</span></li> */}
             </ul>
           </div>
         </div>
