@@ -38,7 +38,7 @@ export default function HeroBanner({ onOrderNow }) {
 
         <motion.div initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.6, delay: 0.2 }} className="flex-shrink-0">
           <img
-            src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=500&h=500&fit=crop"
+            src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&h=300&fit=crop"
             alt="Delicious burger"
             className="w-64 h-64 sm:w-80 sm:h-80 rounded-3xl object-cover shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500"
           />

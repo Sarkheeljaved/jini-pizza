@@ -1,212 +1,609 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 
 // ─── Fake seed data ───────────────────────────────────────────────────────────
-
+// //////////////////////////////////////
 const FAKE_PRODUCTS = [
-  // 🍕 PIZZAS
+  // Pizzas
   {
-    id: "p1",
+    id: 1,
     name: "Margherita",
-    description: 'Cheese & tomato (9", 12", 16")',
-    price: 9.99,
-    sizes: {
-      small: 6.5,
-      medium: 9.99,
-      large: 13.99,
-    },
+    description: "Cheese & tomato",
+    price: 6.5,
     category: "pizzas",
     image_url:
-      "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?w=400",
+      "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?w=400&h=300&fit=crop",
+    is_featured: false,
+    is_available: true,
+    spice_level: "mild",
+    calories: 720,
+    prep_time_mins: 15,
+    sizes: { '9"': 6.5, '12"': 9.99, '16"': 13.99 },
+    tag: "Classic",
+    type: "pizza",
+  },
+  {
+    id: 2,
+    name: "Jini's Special",
+    description:
+      "Cajun chicken, chicken tikka, red onions, green peppers, pineapple & olives",
+    price: 8.99,
+    category: "pizzas",
+    image_url:
+      "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&h=300&fit=crop",
+    is_featured: true,
+    is_available: true,
+    spice_level: "medium",
+    calories: 850,
+    prep_time_mins: 18,
+    sizes: { '9"': 8.99, '12"': 12.99, '16"': 16.99 },
+    tag: "Signature",
+    type: "pizza",
+  },
+  {
+    id: 3,
+    name: "Meat Feast",
+    description: "Pepperoni, beef, ham & salami",
+    price: 7.99,
+    category: "pizzas",
+    image_url:
+      "https://images.unsplash.com/photo-1628840042765-356cda07504e?w=400&h=300&fit=crop",
+    is_featured: true,
+    is_available: true,
+    spice_level: "medium",
+    calories: 920,
+    prep_time_mins: 15,
+    sizes: { '9"': 7.99, '12"': 11.99, '16"': 16.99 },
+    tag: "Popular",
+    type: "pizza",
+  },
+  {
+    id: 4,
+    name: "Balti Taste",
+    description: "Chicken balti, green peppers, red onions & fresh coriander",
+    price: 7.99,
+    category: "pizzas",
+    image_url:
+      "https://images.unsplash.com/photo-1595854341625-f33ee10dbf94?w=400&h=300&fit=crop",
+    is_featured: false,
+    is_available: true,
+    spice_level: "hot",
+    calories: 780,
+    prep_time_mins: 15,
+    sizes: { '9"': 7.99, '12"': 11.99, '16"': 16.99 },
+    type: "pizza",
+  },
+  {
+    id: 5,
+    name: "All Spice",
+    description:
+      "Chicken, balti chicken, pepperoni, fresh coriander & red onions",
+    price: 7.99,
+    category: "pizzas",
+    image_url:
+      "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&h=300&fit=crop",
+    is_featured: false,
+    is_available: true,
+    spice_level: "hot",
+    calories: 810,
+    prep_time_mins: 15,
+    sizes: { '9"': 7.99, '12"': 11.99, '16"': 16.99 },
+    type: "pizza",
+  },
+  {
+    id: 6,
+    name: "Hot & Spicy",
+    description:
+      "Chicken tikka, beef, jalapeños, onions, green chillies & cherry tomatoes",
+    price: 8.99,
+    category: "pizzas",
+    image_url:
+      "https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?w=400&h=300&fit=crop",
+    is_featured: false,
+    is_available: true,
+    spice_level: "extra_hot",
+    calories: 840,
+    prep_time_mins: 15,
+    sizes: { '9"': 8.99, '12"': 12.99, '16"': 16.99 },
+    tag: "Spicy",
+    type: "pizza",
+  },
+  {
+    id: 7,
+    name: "Cajun Special",
+    description: "Cajun chicken, red onions, green peppers & cherry tomatoes",
+    price: 8.99,
+    category: "pizzas",
+    image_url:
+      "https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?w=400&h=300&fit=crop",
+    is_featured: false,
+    is_available: true,
+    spice_level: "medium",
+    calories: 740,
+    prep_time_mins: 15,
+    sizes: { '9"': 8.99, '12"': 12.99, '16"': 16.99 },
+    type: "pizza",
+  },
+  {
+    id: 8,
+    name: "Veggie Supreme",
+    description:
+      "Mushrooms, onions, green peppers, cherry tomatoes & green chillies",
+    price: 7.99,
+    category: "pizzas",
+    image_url:
+      "https://images.unsplash.com/photo-1571066811602-716837513681?w=400&h=300&fit=crop",
+    is_featured: false,
+    is_available: true,
+    spice_level: "mild",
+    calories: 650,
+    prep_time_mins: 15,
+    sizes: { '9"': 7.99, '12"': 11.99, '16"': 16.99 },
+    tag: "Vegetarian",
+    type: "pizza",
+  },
+  {
+    id: 9,
+    name: "Seafood",
+    description: "Tuna, prawns & anchovies",
+    price: 7.99,
+    category: "pizzas",
+    image_url:
+      "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&h=300&fit=crop",
+    is_featured: false,
+    is_available: true,
+    spice_level: "mild",
+    calories: 760,
+    prep_time_mins: 15,
+    sizes: { '9"': 7.99, '12"': 11.99, '16"': 16.99 },
+    type: "pizza",
+  },
+  {
+    id: 10,
+    name: "Hawaiian",
+    description: "Ham & pineapple",
+    price: 7.99,
+    category: "pizzas",
+    image_url:
+      "https://images.unsplash.com/photo-1536514498073-50e69d39c6cf?w=400&h=300&fit=crop",
+    is_featured: false,
+    is_available: true,
+    spice_level: "mild",
+    calories: 690,
+    prep_time_mins: 15,
+    sizes: { '9"': 7.99, '12"': 11.99, '16"': 16.99 },
+    tag: "Classic",
+    type: "pizza",
+  },
+
+  // Burgers
+  {
+    id: 20,
+    name: "Chicken Fillet Burger",
+    description: "Crispy chicken fillet served with chips, salad & sauce",
+    price: 6.49,
+    category: "burgers",
+    image_url:
+      "https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=400&h=300&fit=crop",
+    is_featured: false,
+    is_available: true,
+    spice_level: "mild",
+    calories: 580,
+    prep_time_mins: 10,
+    tag: "Popular",
+    type: "regular",
+  },
+  {
+    id: 21,
+    name: "Cheeseburger",
+    description:
+      "Juicy beef patty with cheese, served with chips, salad & sauce",
+    price: 6.49,
+    category: "burgers",
+    image_url:
+      "https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=400&h=300&fit=crop",
     is_featured: true,
     is_available: true,
     spice_level: "mild",
-    prep_time_mins: 12,
+    calories: 650,
+    prep_time_mins: 10,
+    type: "regular",
   },
   {
-    id: "p2",
-    name: "Jini's Special",
-    description:
-      "Cajun chicken, chicken tikka, onions, peppers, pineapple & olives",
-    price: 12.99,
-    sizes: {
-      small: 8.99,
-      medium: 12.99,
-      large: 16.99,
-    },
-    category: "pizzas",
-    image_url:
-      "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400",
-    is_featured: true,
-    is_available: true,
-    spice_level: "medium",
-    prep_time_mins: 15,
-  },
-  {
-    id: "p3",
-    name: "Meat Feast",
-    description: "Pepperoni, beef, ham & salami",
-    price: 11.99,
-    sizes: {
-      small: 7.99,
-      medium: 11.99,
-      large: 16.99,
-    },
-    category: "pizzas",
-    image_url:
-      "https://images.unsplash.com/photo-1628840042765-356cda07504e?w=400",
-    is_featured: false,
-    is_available: true,
-    spice_level: "medium",
-  },
-
-  // 🍔 BURGERS
-  {
-    id: "p4",
-    name: "Chicken Fillet Burger",
-    description: "Served with chips, salad & sauce",
-    price: 6.49,
-    category: "burgers",
-    image_url:
-      "https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=400",
-    is_featured: true,
-    is_available: true,
-  },
-  {
-    id: "p5",
-    name: "Cheeseburger",
-    description: "Served with chips, salad & sauce",
-    price: 6.49,
-    category: "burgers",
-    image_url:
-      "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400",
-    is_featured: false,
-    is_available: true,
-  },
-  {
-    id: "p6",
+    id: 22,
     name: "Beef Burger",
-    description: "Served with chips, salad & sauce",
+    description: "Classic beef patty served with chips, salad & sauce",
     price: 5.99,
     category: "burgers",
+    image_url:
+      "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop",
+    is_featured: false,
     is_available: true,
+    spice_level: "mild",
+    calories: 600,
+    prep_time_mins: 10,
+    type: "regular",
+  },
+  {
+    id: 23,
+    name: "Kebab Burger",
+    description:
+      "Seasoned kebab meat in a bun, served with chips, salad & sauce",
+    price: 6.49,
+    category: "burgers",
+    image_url:
+      "https://images.unsplash.com/photo-1593718611219-5f73c5d9f9b8?w=400&h=300&fit=crop",
+    is_featured: false,
+    is_available: true,
+    spice_level: "medium",
+    calories: 620,
+    prep_time_mins: 10,
+    type: "regular",
+  },
+  {
+    id: 24,
+    name: "Veggie Burger",
+    description: "Plant-based patty served with chips, salad & sauce",
+    price: 5.99,
+    category: "burgers",
+    image_url:
+      "https://images.unsplash.com/photo-1585238342024-78d387f4a707?w=400&h=300&fit=crop",
+    is_featured: false,
+    is_available: true,
+    spice_level: "mild",
+    calories: 520,
+    prep_time_mins: 10,
+    tag: "Vegetarian",
+    type: "regular",
   },
 
-  // 🎉 SPECIAL OFFERS
+  // Special Offers
   {
-    id: "p7",
+    id: 30,
     name: "Offer 1",
-    description: '9" pizza (2 toppings) + fries + drink',
+    description: '9" pizza (2 toppings), 1× fries & 1× can of drink',
     price: 10.99,
-    category: "combos",
+    category: "offers",
+    image_url:
+      "https://images.unsplash.com/photo-1550547660-d9450f859349?w=400&h=300&fit=crop",
     is_featured: true,
+    is_available: true,
+    spice_level: "mild",
+    calories: 950,
+    prep_time_mins: 15,
+    tag: "Best Value",
+    type: "regular",
   },
   {
-    id: "p8",
+    id: 31,
     name: "Offer 2",
-    description: '2x 9" pizzas (3 toppings) + 2 fries',
+    description: '2× 9" pizzas (3 toppings each) & 2× fries',
     price: 17.99,
-    category: "combos",
+    category: "offers",
+    image_url:
+      "https://images.unsplash.com/photo-1604382355076-af4b0eb60143?w=400&h=300&fit=crop",
+    is_featured: true,
+    is_available: true,
+    spice_level: "mild",
+    calories: 1850,
+    prep_time_mins: 25,
+    tag: "For Two",
+    type: "regular",
   },
   {
-    id: "p9",
+    id: 32,
     name: "Offer 3",
-    description: '12" pizza + fries + 2 drinks',
+    description: '12" pizza (3 toppings), 1× fries & 2× cans of drink',
     price: 17.49,
-    category: "combos",
+    category: "offers",
+    image_url:
+      "https://images.unsplash.com/photo-1590947132387-155cc02f3212?w=400&h=300&fit=crop",
+    is_featured: false,
+    is_available: true,
+    spice_level: "mild",
+    calories: 1450,
+    prep_time_mins: 20,
+    tag: "Family",
+    type: "regular",
   },
   {
-    id: "p10",
+    id: 33,
     name: "Offer 4",
-    description: '2x 12" pizzas + large fries + 1.5L drink',
+    description:
+      '2× 12" pizzas (3 toppings each), large fries & 1.5L bottle of drink',
     price: 29.99,
-    category: "combos",
+    category: "offers",
+    image_url:
+      "https://images.unsplash.com/photo-1600891964599-f61ba0e24092?w=400&h=300&fit=crop",
+    is_featured: false,
+    is_available: true,
+    spice_level: "mild",
+    calories: 2600,
+    prep_time_mins: 30,
+    tag: "Party Deal",
+    type: "regular",
   },
 
-  // 🍢 KEBABS & PIRI PIRI
+  // Kebabs & Piri Piri
   {
-    id: "p11",
+    id: 40,
     name: "Lamb Donner Kebab",
-    description: "Served with salad & sauce",
+    description: "Tender lamb donner served with salad & sauce",
     price: 7.49,
     category: "kebabs",
+    image_url:
+      "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=400&h=300&fit=crop",
+    is_featured: true,
+    is_available: true,
+    spice_level: "medium",
+    calories: 680,
+    prep_time_mins: 10,
+    tag: "Popular",
+    type: "regular",
   },
   {
-    id: "p12",
+    id: 41,
     name: "Chicken Tikka Kebab",
-    description: "Served with salad & sauce",
+    description: "Marinated chicken tikka served with salad & sauce",
     price: 7.99,
     category: "kebabs",
+    image_url:
+      "https://images.unsplash.com/photo-1599481238640-4c1288751e0b?w=400&h=300&fit=crop",
+    is_featured: false,
+    is_available: true,
+    spice_level: "hot",
+    calories: 590,
+    prep_time_mins: 10,
+    type: "regular",
   },
   {
-    id: "p13",
+    id: 42,
     name: "Full Piri Piri Chicken",
-    description: "With chips, salad & sauce",
+    description: "Whole piri piri chicken served with salad, chips & sauce",
     price: 13.99,
     category: "kebabs",
+    image_url:
+      "https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?w=400&h=300&fit=crop",
+    is_featured: true,
+    is_available: true,
+    spice_level: "extra_hot",
+    calories: 1120,
+    prep_time_mins: 25,
+    tag: "Signature",
+    type: "regular",
+  },
+  {
+    id: 43,
+    name: "Half Piri Piri Chicken",
+    description: "Half piri piri chicken served with salad, chips & sauce",
+    price: 8.99,
+    category: "kebabs",
+    image_url:
+      "https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?w=400&h=300&fit=crop",
+    is_featured: false,
+    is_available: true,
+    spice_level: "hot",
+    calories: 760,
+    prep_time_mins: 18,
+    type: "regular",
   },
 
-  // 🍟 SIDES
+  // Sides
   {
-    id: "p14",
+    id: 50,
     name: "Fries",
+    description: "Crispy golden fries",
     price: 2.9,
     category: "sides",
+    image_url:
+      "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400&h=300&fit=crop",
+    is_featured: false,
+    is_available: true,
+    spice_level: "mild",
+    calories: 380,
+    prep_time_mins: 5,
+    type: "regular",
   },
   {
-    id: "p15",
+    id: 51,
     name: "Potato Wedges",
+    description: "Seasoned potato wedges",
     price: 3.99,
     category: "sides",
+    image_url:
+      "https://images.unsplash.com/photo-1630384060421-cf20c0f2a3fc?w=400&h=300&fit=crop",
+    is_featured: false,
+    is_available: true,
+    spice_level: "mild",
+    calories: 420,
+    prep_time_mins: 7,
+    tag: "Vegetarian",
+    type: "regular",
   },
   {
-    id: "p16",
-    name: "Chicken Wings (10pcs)",
+    id: 52,
+    name: "Chicken Wings (10 pcs)",
+    description: "10 crispy chicken wings",
     price: 7.99,
     category: "sides",
+    image_url:
+      "https://images.unsplash.com/photo-1567620832903-9fc6debc209f?w=400&h=300&fit=crop",
+    is_featured: true,
+    is_available: true,
+    spice_level: "medium",
+    calories: 680,
+    prep_time_mins: 12,
+    tag: "Popular",
+    type: "regular",
   },
   {
-    id: "p17",
-    name: "Garlic Bread",
-    description: "Plain / Cheese / Stuffed",
+    id: 53,
+    name: "Onion Rings",
+    description: "Crispy battered onion rings",
     price: 3.49,
     category: "sides",
+    image_url:
+      "https://images.unsplash.com/photo-1639024471283-03518883512d?w=400&h=300&fit=crop",
+    is_featured: false,
+    is_available: true,
+    spice_level: "mild",
+    calories: 390,
+    prep_time_mins: 5,
+    tag: "Vegetarian",
+    type: "regular",
+  },
+  {
+    id: 54,
+    name: "Garlic Bread",
+    description: "Classic garlic bread",
+    price: 3.49,
+    category: "sides",
+    image_url:
+      "https://images.unsplash.com/photo-1573140247632-f8fd74997d5c?w=400&h=300&fit=crop",
+    is_featured: false,
+    is_available: true,
+    spice_level: "mild",
+    calories: 280,
+    prep_time_mins: 5,
+    tag: "Vegetarian",
+    type: "regular",
+  },
+  {
+    id: 55,
+    name: "Garlic Bread with Cheese",
+    description: "Garlic bread topped with melted cheese",
+    price: 4.49,
+    category: "sides",
+    image_url:
+      "https://images.unsplash.com/photo-1573140247632-f8fd74997d5c?w=400&h=300&fit=crop",
+    is_featured: false,
+    is_available: true,
+    spice_level: "mild",
+    calories: 380,
+    prep_time_mins: 6,
+    tag: "Vegetarian",
+    type: "regular",
+  },
+  {
+    id: 56,
+    name: "Stuffed Garlic Bread",
+    description: "Generously stuffed garlic bread with cheese & fillings",
+    price: 5.99,
+    category: "sides",
+    image_url:
+      "https://images.unsplash.com/photo-1573140247632-f8fd74997d5c?w=400&h=300&fit=crop",
+    is_featured: false,
+    is_available: true,
+    spice_level: "mild",
+    calories: 480,
+    prep_time_mins: 8,
+    tag: "Popular",
+    type: "regular",
+  },
+  {
+    id: 57,
+    name: "Rice",
+    description: "Steamed basmati rice",
+    price: 2.99,
+    category: "sides",
+    image_url:
+      "https://images.unsplash.com/photo-1586201375761-83865001e8ac?w=400&h=300&fit=crop",
+    is_featured: false,
+    is_available: true,
+    spice_level: "mild",
+    calories: 220,
+    prep_time_mins: 10,
+    tag: "Vegan",
+    type: "regular",
+  },
+  {
+    id: 58,
+    name: "Naan Bread",
+    description: "Freshly baked naan",
+    price: 1.99,
+    category: "sides",
+    image_url:
+      "https://images.unsplash.com/photo-1601050690597-df0568f70950?w=400&h=300&fit=crop",
+    is_featured: false,
+    is_available: true,
+    spice_level: "mild",
+    calories: 180,
+    prep_time_mins: 5,
+    tag: "Vegetarian",
+    type: "regular",
   },
 
-  // 🥤 DRINKS
+  // Drinks & Desserts
   {
-    id: "p18",
-    name: "Soft Drink Can (330ml)",
-    description: "Coca-Cola, Sprite, Fanta, Pepsi, 7up",
+    id: 60,
+    name: "Can (330ml)",
+    description: "Coca-Cola, Sprite, Fanta, Pepsi or 7-Up",
     price: 1.5,
     category: "drinks",
+    image_url:
+      "https://images.unsplash.com/photo-1629203851122-3726ecdf080e?w=400&h=300&fit=crop",
+    is_featured: false,
+    is_available: true,
+    spice_level: "mild",
+    calories: 150,
+    prep_time_mins: 1,
+    tag: "Vegan",
+    type: "regular",
   },
   {
-    id: "p19",
-    name: "1.5L Bottle",
+    id: 61,
+    name: "Bottle (1.5L)",
+    description: "Large bottle — choice of flavours",
     price: 3.5,
     category: "drinks",
+    image_url:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOD6zax4BN9V2GpMVPXS5kAjXadJzM5KgOPw&s",
+    is_featured: false,
+    is_available: true,
+    spice_level: "mild",
+    calories: 650,
+    prep_time_mins: 1,
+    tag: "Vegan",
+    type: "regular",
   },
-
-  // 🍰 DESSERTS
   {
-    id: "p20",
+    id: 62,
     name: "Chocolate Fudge Cake",
-    price: 4.99,
+    description: "Rich, indulgent chocolate fudge cake",
+    price: 3.99,
     category: "desserts",
+    image_url:
+      "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=400&h=300&fit=crop",
+    is_featured: true,
+    is_available: true,
+    spice_level: "mild",
+    calories: 520,
+    prep_time_mins: 2,
+    tag: "Dessert",
+    type: "regular",
   },
   {
-    id: "p21",
+    id: 63,
     name: "Cheesecake",
-    price: 4.99,
+    description: "Classic creamy cheesecake",
+    price: 3.99,
     category: "desserts",
+    image_url:
+      "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=400&h=300&fit=crop",
+    is_featured: false,
+    is_available: true,
+    spice_level: "mild",
+    calories: 480,
+    prep_time_mins: 2,
+    tag: "Dessert",
+    type: "regular",
   },
 ];
 
 const FAKE_CATEGORIES = [
   {
-    id: "cat1",
+    id: "pizzas",
     name: "Pizzas",
-    description: '(Available in 9", 12", and 16")*',
+    description: "Freshly baked stone-oven pizzas",
     icon_emoji: "🍕",
     image_url:
       "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?w=400&h=300&fit=crop",
@@ -214,7 +611,7 @@ const FAKE_CATEGORIES = [
     is_active: true,
   },
   {
-    id: "cat2",
+    id: "burgers",
     name: "Burgers",
     description: "Juicy smash burgers & gourmet stacks",
     icon_emoji: "🍔",
@@ -224,10 +621,10 @@ const FAKE_CATEGORIES = [
     is_active: true,
   },
   {
-    id: "cat3",
+    id: "offers",
     name: "Special Offers",
     description: "Limited time deals you can't miss",
-    icon_emoji: "🎉",
+    icon_emoji: "🎁",
     image_url:
       "https://images.unsplash.com/photo-1550547660-d9450f859349?w=400&h=300&fit=crop",
     sort_order: 3,
@@ -235,191 +632,582 @@ const FAKE_CATEGORIES = [
     badge: "Hot Deals",
   },
   {
-    id: "cat4",
-    name: "Sides & Snacks",
-    description: "Fries, wings, onion rings and more",
-    icon_emoji: "🍟",
+    id: "kebabs",
+    name: "Kebabs & Piri Piri",
+    description: "Tasty kebabs and piri piri chicken",
+    icon_emoji: "🥙",
     image_url:
-      "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=400&h=300&fit=crop",
     sort_order: 4,
     is_active: true,
   },
   {
-    id: "cat5",
-    name: "Drinks",
-    description: "Refreshing cold drinks & shakes",
-    icon_emoji: "🥤",
+    id: "sides",
+    name: "Sides",
+    description: "Fries, wings, onion rings and more",
+    icon_emoji: "🍟",
     image_url:
-      "https://images.unsplash.com/photo-1629203851122-3726ecdf080e?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400&h=300&fit=crop",
     sort_order: 5,
     is_active: true,
   },
   {
-    id: "cat6",
-    name: "Desserts",
-    description: "Sweet treats to end your meal",
-    icon_emoji: "🎂",
+    id: "drinks",
+    name: "Drinks & Desserts",
+    description: "Refreshing drinks & sweet treats",
+    icon_emoji: "🥤",
     image_url:
-      "https://images.unsplash.com/photo-1564355808539-22fda35bed7e?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1629203851122-3726ecdf080e?w=400&h=300&fit=crop",
     sort_order: 6,
     is_active: true,
   },
 ];
 
+// Updated FAKE_SUBCATEGORIES with CORRECT image URLs for all items
+
 const FAKE_SUBCATEGORIES = [
+  // ========== PIZZAS (All 10 pizzas) ==========
   {
     id: "sub1",
-    category_id: "cat1",
-    name: "Jini's Special",
-    description:
-      "Cajun chicken, chicken tikka, red onions, green peppers, pineapple & olives. (£8.99 | £12.99 | £16.99)",
-    base_price: 13.99,
+    category_id: "pizzas",
+    name: "Margherita",
+    description: "Cheese & tomato",
+    base_price: 6.5,
     image_url:
       "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?w=400&h=300&fit=crop",
     sort_order: 1,
     is_active: true,
-    base_options: [
-      {
-        group_name: "Crust Type",
-        required: true,
-        select_type: "single",
-        options: [
-          { name: "Deep Pan", extra_price: 0 },
-          { name: "Thin Crust", extra_price: 0 },
-          { name: "Stuffed Crust", extra_price: 2.0 },
-        ],
-      },
-    ],
-    topping_groups: [
-      {
-        group_name: "Extra Toppings",
-        max_selections: 5,
-        options: [
-          { name: "Anchovies", extra_price: 1.5 },
-          { name: "Beef", extra_price: 2.0 },
-          { name: "Cajun Chicken", extra_price: 2.0 },
-          { name: "Cherry Tomatoes", extra_price: 1.0 },
-          { name: "Ham", extra_price: 1.5 },
-          { name: "Olives", extra_price: 1.0 },
-          { name: "Chicken Balti", extra_price: 2.5 },
-          { name: "Jalapeños", extra_price: 0.5 },
-          { name: "Extra Cheese", extra_price: 1.5 },
-        ],
-      },
-    ],
+    tag: "Classic",
+    sizes: { '9"': 6.5, '12"': 9.99, '16"': 13.99 },
   },
   {
     id: "sub2",
-    category_id: "cat1",
-    name: "Margherita 9 inch",
-    description: "Served with mozzarella, tomato sauce and fresh basil",
+    category_id: "pizzas",
+    name: "Jini's Special",
+    description:
+      "Cajun chicken, chicken tikka, red onions, green peppers, pineapple & olives",
     base_price: 8.99,
     image_url:
-      "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1513104890138-7c749659a591?w=400&h=300&fit=crop",
     sort_order: 2,
     is_active: true,
-    base_options: [
-      {
-        group_name: "Crust Type",
-        required: true,
-        select_type: "single",
-        options: [
-          { name: "Deep Pan", extra_price: 0 },
-          { name: "Thin Crust", extra_price: 0 },
-          { name: "Stuffed Crust", extra_price: 1.5 },
-        ],
-      },
-    ],
-    topping_groups: [
-      {
-        group_name: "Extra Toppings",
-        max_selections: 4,
-        options: [
-          { name: "Anchovies", extra_price: 1.0 },
-          { name: "Beef", extra_price: 1.5 },
-          { name: "Cherry Tomatoes", extra_price: 0.75 },
-          { name: "Ham", extra_price: 1.0 },
-          { name: "Olives", extra_price: 0.75 },
-          { name: "Extra Cheese", extra_price: 1.0 },
-        ],
-      },
-    ],
+    tag: "Signature",
+    sizes: { '9"': 8.99, '12"': 12.99, '16"': 16.99 },
   },
   {
     id: "sub3",
-    category_id: "cat1",
-    name: "Pepperoni 16 inch",
-    description: "Loaded with pepperoni, mozzarella and oregano",
-    base_price: 15.99,
+    category_id: "pizzas",
+    name: "Meat Feast",
+    description: "Pepperoni, beef, ham & salami",
+    base_price: 7.99,
     image_url:
       "https://images.unsplash.com/photo-1628840042765-356cda07504e?w=400&h=300&fit=crop",
     sort_order: 3,
     is_active: true,
-    base_options: [
-      {
-        group_name: "Crust Type",
-        required: true,
-        select_type: "single",
-        options: [
-          { name: "Deep Pan", extra_price: 0 },
-          { name: "Thin Crust", extra_price: 0 },
-          { name: "Stuffed Crust", extra_price: 2.0 },
-        ],
-      },
-    ],
-    topping_groups: [
-      {
-        group_name: "Extra Toppings",
-        max_selections: 5,
-        options: [
-          { name: "Anchovies", extra_price: 1.5 },
-          { name: "Extra Beef", extra_price: 2.0 },
-          { name: "Cherry Tomatoes", extra_price: 1.0 },
-          { name: "Ham", extra_price: 1.5 },
-          { name: "Jalapeños", extra_price: 0.5 },
-          { name: "Extra Cheese", extra_price: 1.5 },
-        ],
-      },
-    ],
+    tag: "Popular",
+    sizes: { '9"': 7.99, '12"': 11.99, '16"': 16.99 },
   },
   {
     id: "sub4",
-    category_id: "cat2",
-    name: "Classic Smash Burger",
-    description: "Double patty, melted cheddar, pickles, secret sauce",
-    base_price: 9.99,
+    category_id: "pizzas",
+    name: "Balti Taste",
+    description: "Chicken balti, green peppers, red onions & fresh coriander",
+    base_price: 7.99,
     image_url:
-      "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1595854341625-f33ee10dbf94?w=400&h=300&fit=crop",
+    sort_order: 4,
+    is_active: true,
+    sizes: { '9"': 7.99, '12"': 11.99, '16"': 16.99 },
+  },
+  {
+    id: "sub5",
+    category_id: "pizzas",
+    name: "All Spice",
+    description:
+      "Chicken, balti chicken, pepperoni, fresh coriander & red onions",
+    base_price: 7.99,
+    image_url:
+      "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&h=300&fit=crop",
+    sort_order: 5,
+    is_active: true,
+    sizes: { '9"': 7.99, '12"': 11.99, '16"': 16.99 },
+  },
+  {
+    id: "sub6",
+    category_id: "pizzas",
+    name: "Hot & Spicy",
+    description:
+      "Chicken tikka, beef, jalapeños, onions, green chillies & cherry tomatoes",
+    base_price: 8.99,
+    image_url:
+      "https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?w=400&h=300&fit=crop",
+    sort_order: 6,
+    is_active: true,
+    tag: "Spicy",
+    sizes: { '9"': 8.99, '12"': 12.99, '16"': 16.99 },
+  },
+  {
+    id: "sub7",
+    category_id: "pizzas",
+    name: "Cajun Special",
+    description: "Cajun chicken, red onions, green peppers & cherry tomatoes",
+    base_price: 8.99,
+    image_url:
+      "https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?w=400&h=300&fit=crop",
+    sort_order: 7,
+    is_active: true,
+    sizes: { '9"': 8.99, '12"': 12.99, '16"': 16.99 },
+  },
+
+  // VEGGIE SUPREME - Fixed Image URL
+  {
+    id: "sub8",
+    category_id: "pizzas",
+    name: "Veggie Supreme",
+    description:
+      "Mushrooms, onions, green peppers, cherry tomatoes & green chillies",
+    base_price: 7.99,
+    image_url:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvKrvYyLC_eyksYv5xOegtAIjYj6NjHBm-Qg&s",
+    sort_order: 8,
+    is_active: true,
+    tag: "Vegetarian",
+    sizes: { '9"': 7.99, '12"': 11.99, '16"': 16.99 },
+  },
+
+  {
+    id: "sub9",
+    category_id: "pizzas",
+    name: "Seafood",
+    description: "Tuna, prawns & anchovies",
+    base_price: 7.99,
+    image_url:
+      "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=400&h=300&fit=crop",
+    sort_order: 9,
+    is_active: true,
+    sizes: { '9"': 7.99, '12"': 11.99, '16"': 16.99 },
+  },
+  {
+    id: "sub10",
+    category_id: "pizzas",
+    name: "Hawaiian",
+    description: "Ham & pineapple",
+    base_price: 7.99,
+    image_url:
+      "https://images.unsplash.com/photo-1536514498073-50e69d39c6cf?w=400&h=300&fit=crop",
+    sort_order: 10,
+    is_active: true,
+    tag: "Classic",
+    sizes: { '9"': 7.99, '12"': 11.99, '16"': 16.99 },
+  },
+
+  // ========== BURGERS (All 5 burgers) ==========
+  {
+    id: "sub11",
+    category_id: "burgers",
+    name: "Chicken Fillet Burger",
+    description: "Crispy chicken fillet served with chips, salad & sauce",
+    base_price: 6.49,
+    image_url:
+      "https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=400&h=300&fit=crop",
     sort_order: 1,
     is_active: true,
-    base_options: [
-      {
-        group_name: "Patty Type",
-        required: true,
-        select_type: "single",
-        options: [
-          { name: "Beef", extra_price: 0 },
-          { name: "Chicken", extra_price: 0 },
-          { name: "Veggie", extra_price: 0 },
-        ],
-      },
-    ],
-    topping_groups: [
-      {
-        group_name: "Extras",
-        max_selections: 4,
-        options: [
-          { name: "Extra Cheese", extra_price: 0.75 },
-          { name: "Bacon", extra_price: 1.5 },
-          { name: "Avocado", extra_price: 1.0 },
-          { name: "Fried Egg", extra_price: 1.0 },
-          { name: "Jalapeños", extra_price: 0.5 },
-        ],
-      },
-    ],
+    tag: "Popular",
+  },
+  {
+    id: "sub12",
+    category_id: "burgers",
+    name: "Cheeseburger",
+    description:
+      "Juicy beef patty with cheese, served with chips, salad & sauce",
+    base_price: 6.49,
+    image_url:
+      "https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=400&h=300&fit=crop",
+    sort_order: 2,
+    is_active: true,
+  },
+  {
+    id: "sub13",
+    category_id: "burgers",
+    name: "Beef Burger",
+    description: "Classic beef patty served with chips, salad & sauce",
+    base_price: 5.99,
+    image_url:
+      "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop",
+    sort_order: 3,
+    is_active: true,
+  },
+
+  // KEBAB BURGER - Fixed Image URL
+  {
+    id: "sub14",
+    category_id: "burgers",
+    name: "Kebab Burger",
+    description:
+      "Seasoned kebab meat in a bun, served with chips, salad & sauce",
+    base_price: 6.49,
+    image_url:
+      "https://hips.hearstapps.com/hmg-prod/images/persian-burgers-68964eb5144c6.png?crop=0.675xw:0.968xh;0.0748xw,0&resize=640:*",
+    sort_order: 4,
+    is_active: true,
+  },
+
+  {
+    id: "sub15",
+    category_id: "burgers",
+    name: "Veggie Burger",
+    description: "Plant-based patty served with chips, salad & sauce",
+    base_price: 5.99,
+    image_url:
+      "https://images.unsplash.com/photo-1585238342024-78d387f4a707?w=400&h=300&fit=crop",
+    sort_order: 5,
+    is_active: true,
+    tag: "Vegetarian",
+  },
+
+  // ========== SPECIAL OFFERS (All 4 offers) ==========
+  {
+    id: "sub16",
+    category_id: "offers",
+    name: "Offer 1",
+    description: '9" pizza (2 toppings), 1× fries & 1× can of drink',
+    base_price: 10.99,
+    image_url:
+      "https://images.unsplash.com/photo-1550547660-d9450f859349?w=400&h=300&fit=crop",
+    sort_order: 1,
+    is_active: true,
+    tag: "Best Value",
+  },
+  {
+    id: "sub17",
+    category_id: "offers",
+    name: "Offer 2",
+    description: '2× 9" pizzas (3 toppings each) & 2× fries',
+    base_price: 17.99,
+    image_url:
+      "https://images.unsplash.com/photo-1604382355076-af4b0eb60143?w=400&h=300&fit=crop",
+    sort_order: 2,
+    is_active: true,
+    tag: "For Two",
+  },
+  {
+    id: "sub18",
+    category_id: "offers",
+    name: "Offer 3",
+    description: '12" pizza (3 toppings), 1× fries & 2× cans of drink',
+    base_price: 17.49,
+    image_url:
+      "https://images.unsplash.com/photo-1590947132387-155cc02f3212?w=400&h=300&fit=crop",
+    sort_order: 3,
+    is_active: true,
+    tag: "Family",
+  },
+  {
+    id: "sub19",
+    category_id: "offers",
+    name: "Offer 4",
+    description:
+      '2× 12" pizzas (3 toppings each), large fries & 1.5L bottle of drink',
+    base_price: 29.99,
+    image_url:
+      "https://images.unsplash.com/photo-1600891964599-f61ba0e24092?w=400&h=300&fit=crop",
+    sort_order: 4,
+    is_active: true,
+    tag: "Party Deal",
+  },
+
+  // ========== KEBABS & PIRI PIRI (All 4 items) ==========
+  {
+    id: "sub20",
+    category_id: "kebabs",
+    name: "Lamb Donner Kebab",
+    description: "Tender lamb donner served with salad & sauce",
+    base_price: 7.49,
+    image_url:
+      "https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?w=400&h=300&fit=crop",
+    sort_order: 1,
+    is_active: true,
+    tag: "Popular",
+  },
+
+  // CHICKEN TIKKA KEBAB - Fixed Image URL
+  {
+    id: "sub21",
+    category_id: "kebabs",
+    name: "Chicken Tikka Kebab",
+    description: "Marinated chicken tikka served with salad & sauce",
+    base_price: 7.99,
+    image_url:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYvvTwgNamD4TDBp4EYolAnlxmRjbCJcf1JA&s",
+    sort_order: 2,
+    is_active: true,
+  },
+
+  {
+    id: "sub22",
+    category_id: "kebabs",
+    name: "Full Piri Piri Chicken",
+    description: "Whole piri piri chicken served with salad, chips & sauce",
+    base_price: 13.99,
+    image_url:
+      "https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?w=400&h=300&fit=crop",
+    sort_order: 3,
+    is_active: true,
+    tag: "Signature",
+  },
+  {
+    id: "sub23",
+    category_id: "kebabs",
+    name: "Half Piri Piri Chicken",
+    description: "Half piri piri chicken served with salad, chips & sauce",
+    base_price: 8.99,
+    image_url:
+      "https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?w=400&h=300&fit=crop",
+    sort_order: 4,
+    is_active: true,
+  },
+
+  // ========== SIDES (All 9 sides) ==========
+  {
+    id: "sub24",
+    category_id: "sides",
+    name: "Fries",
+    description: "Crispy golden fries",
+    base_price: 2.9,
+    image_url:
+      "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400&h=300&fit=crop",
+    sort_order: 1,
+    is_active: true,
+  },
+
+  // POTATO WEDGES - Fixed Image URL
+  {
+    id: "sub25",
+    category_id: "sides",
+    name: "Potato Wedges",
+    description: "Seasoned potato wedges",
+    base_price: 3.99,
+    image_url:
+      "https://www.recipetineats.com/tachyon/2015/05/Seasoned-Baked-Potato-Wedges_7.jpg?resize=500%2C375",
+    sort_order: 2,
+    is_active: true,
+    tag: "Vegetarian",
+  },
+
+  {
+    id: "sub26",
+    category_id: "sides",
+    name: "Chicken Wings (10 pcs)",
+    description: "10 crispy chicken wings",
+    base_price: 7.99,
+    image_url:
+      "https://images.unsplash.com/photo-1567620832903-9fc6debc209f?w=400&h=300&fit=crop",
+    sort_order: 3,
+    is_active: true,
+    tag: "Popular",
+  },
+  {
+    id: "sub27",
+    category_id: "sides",
+    name: "Onion Rings",
+    description: "Crispy battered onion rings",
+    base_price: 3.49,
+    image_url:
+      "https://images.unsplash.com/photo-1639024471283-03518883512d?w=400&h=300&fit=crop",
+    sort_order: 4,
+    is_active: true,
+    tag: "Vegetarian",
+  },
+
+  // GARLIC BREAD - Fixed Image URL
+  {
+    id: "sub28",
+    category_id: "sides",
+    name: "Garlic Bread",
+    description: "Classic garlic bread",
+    base_price: 3.49,
+    image_url:
+      "https://www.allrecipes.com/thmb/sueXmRXgK-S27uRzTrJuGb-_Smc=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/216077-garlic-bread-spread-step-beauty-4x3-BP-3169-ef03a4a12d8c46e196055555be5b8d79.jpg",
+    sort_order: 5,
+    is_active: true,
+    tag: "Vegetarian",
+  },
+
+  // GARLIC BREAD WITH CHEESE - Fixed Image URL
+  {
+    id: "sub29",
+    category_id: "sides",
+    name: "Garlic Bread with Cheese",
+    description: "Garlic bread topped with melted cheese",
+    base_price: 4.49,
+    image_url: "https://homecookedharvest.com/wp-content/uploads/2022/06/Stuffed-Garlic-Bread-G.jpg",
+    sort_order: 6,
+    is_active: true,
+    tag: "Vegetarian",
+  },
+
+  // STUFFED GARLIC BREAD - Fixed Image URL
+  {
+    id: "sub30",
+    category_id: "sides",
+    name: "Stuffed Garlic Bread",
+    description: "Generously stuffed garlic bread with cheese & fillings",
+    base_price: 5.99,
+    image_url:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTH4MvAVT1dHmWeYLWbi2Dld8sAEnsa36LgIA&s",
+    sort_order: 7,
+    is_active: true,
+    tag: "Popular",
+  },
+
+  // RICE - Fixed Image URL
+  {
+    id: "sub31",
+    category_id: "sides",
+    name: "Rice",
+    description: "Steamed basmati rice",
+    base_price: 2.99,
+    image_url:
+      "https://media.soscuisine.com/images/recettes/large/2887.jpg",
+    sort_order: 8,
+    is_active: true,
+    tag: "Vegan",
+  },
+
+  // NAAN BREAD - Fixed Image URL
+  {
+    id: "sub32",
+    category_id: "sides",
+    name: "Naan Bread",
+    description: "Freshly baked naan",
+    base_price: 1.99,
+    image_url:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4HRSP2dLR0NLXYaezeLM9UW2wErZ6fFL5Zg&s",
+    sort_order: 9,
+    is_active: true,
+    tag: "Vegetarian",
+  },
+
+  // ========== DRINKS & DESSERTS (All 4 items) ==========
+  {
+    id: "sub33",
+    category_id: "drinks",
+    name: "Can (330ml)",
+    description: "Coca-Cola, Sprite, Fanta, Pepsi or 7-Up",
+    base_price: 1.5,
+    image_url:
+      "https://images.unsplash.com/photo-1629203851122-3726ecdf080e?w=400&h=300&fit=crop",
+    sort_order: 1,
+    is_active: true,
+    tag: "Vegan",
+  },
+
+  // BOTTLE (1.5L) - Fixed Image URL
+  {
+    id: "sub34",
+    category_id: "drinks",
+    name: "Bottle (1.5L)",
+    description: "Large bottle — choice of flavours",
+    base_price: 3.5,
+    image_url:
+      "https://images.unsplash.com/photo-1622483767028-3f66f32aef97?w=400&h=300&fit=crop",
+    sort_order: 2,
+    is_active: true,
+    tag: "Vegan",
+  },
+
+  {
+    id: "sub35",
+    category_id: "drinks",
+    name: "Chocolate Fudge Cake",
+    description: "Rich, indulgent chocolate fudge cake",
+    base_price: 3.99,
+    image_url:
+      "https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=400&h=300&fit=crop",
+    sort_order: 3,
+    is_active: true,
+    tag: "Dessert",
+  },
+  {
+    id: "sub36",
+    category_id: "drinks",
+    name: "Cheesecake",
+    description: "Classic creamy cheesecake",
+    base_price: 3.99,
+    image_url:
+      "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?w=400&h=300&fit=crop",
+    sort_order: 4,
+    is_active: true,
+    tag: "Dessert",
   },
 ];
 
+const FAKE_REVIEWS = [
+  {
+    id: "rev1",
+    product_id: 1,
+    user_name: "John D.",
+    rating: 5,
+    comment: "Best margherita in town! The crust was perfect.",
+    date: "2024-03-15",
+    is_verified: true,
+  },
+  {
+    id: "rev2",
+    product_id: 2,
+    user_name: "Sarah M.",
+    rating: 5,
+    comment:
+      "Jini's Special is absolutely amazing! Great combination of flavors.",
+    date: "2024-03-10",
+    is_verified: true,
+  },
+  {
+    id: "rev3",
+    product_id: 3,
+    user_name: "Mike R.",
+    rating: 4,
+    comment: "Meat Feast is loaded with toppings. Very filling!",
+    date: "2024-03-12",
+    is_verified: true,
+  },
+  {
+    id: "rev4",
+    product_id: 20,
+    user_name: "Emma L.",
+    rating: 5,
+    comment: "The chicken fillet burger is crispy and juicy!",
+    date: "2024-03-08",
+    is_verified: true,
+  },
+  {
+    id: "rev5",
+    product_id: 40,
+    user_name: "David K.",
+    rating: 5,
+    comment: "Best lamb donner in town. Highly recommended!",
+    date: "2024-03-05",
+    is_verified: true,
+  },
+  {
+    id: "rev6",
+    product_id: 42,
+    user_name: "Lisa W.",
+    rating: 5,
+    comment: "The piri piri chicken is a must try! So flavorful.",
+    date: "2024-03-01",
+    is_verified: true,
+  },
+];
+
+// const FAKE_REVIEWS = [
+//   { id: "rev1", product_id: 1, user_name: "John D.", rating: 5, comment: "Best margherita in town! The crust was perfect.", date: "2024-03-15", is_verified: true },
+//   { id: "rev2", product_id: 2, user_name: "Sarah M.", rating: 5, comment: "Jini's Special is absolutely amazing! Great combination of flavors.", date: "2024-03-10", is_verified: true },
+//   { id: "rev3", product_id: 20, user_name: "Mike R.", rating: 4, comment: "Crispy chicken fillet and good portion size.", date: "2024-03-12", is_verified: true },
+//   { id: "rev4", product_id: 42, user_name: "Emma L.", rating: 5, comment: "The piri piri chicken is a must try! So flavorful.", date: "2024-03-08", is_verified: true },
+// ];
+
+// data 1
 // const FAKE_PRODUCTS = [
 //   { id: 'p1', name: 'Classic Smash Burger', description: 'Double patty, melted cheddar, pickles, secret sauce on a brioche bun', price: 9.99, category: 'burgers', image_url: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop', is_featured: true, is_available: true, spice_level: 'mild', calories: 650, prep_time_mins: 8 },
 //   { id: 'p2', name: 'Spicy Chicken Burger', description: 'Crispy chicken fillet, jalapeños, sriracha mayo, coleslaw', price: 10.49, category: 'burgers', image_url: 'https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=400&h=300&fit=crop', is_featured: false, is_available: true, spice_level: 'hot', calories: 580, prep_time_mins: 10 },
