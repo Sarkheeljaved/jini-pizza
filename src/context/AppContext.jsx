@@ -1667,9 +1667,8 @@ const FAKE_SUBCATEGORIES = [
   },
 ];
 
-
 const FAKE_STORE_SETTINGS = {
-  store_name: 'BlazeBites',
+  store_name: "BlazeBites",
   delivery_enabled: true,
   delivery_open_time_ms: 39600000,
   delivery_close_time_ms: 79200000,
@@ -1686,130 +1685,279 @@ const FAKE_STORE_SETTINGS = {
 // ─── Context ──────────────────────────────────────────────────────────────────
 const AppContext = createContext(null);
 
+// Helper: read/write localStorage with per-user key namespacing
+const lsGet = (key, fallback) => {
+  try {
+    const v = localStorage.getItem(key);
+    return v ? JSON.parse(v) : fallback;
+  } catch {
+    return fallback;
+  }
+};
+const lsSet = (key, value) => {
+  try {
+    localStorage.setItem(key, JSON.stringify(value));
+  } catch {}
+};
+
 export function AppProvider({ children }) {
   // Auth state
-  const [currentUser, setCurrentUser] = useState(() => {
-    try { return JSON.parse(localStorage.getItem('bb_user')) || null; } catch { return null; }
-  });
+  const [currentUser, setCurrentUser] = useState(() => lsGet("bb_user", null));
 
-  // Data state (fake, in-memory + localStorage)
-  const [cart, setCart] = useState(() => {
-    try { return JSON.parse(localStorage.getItem('bb_cart')) || []; } catch { return []; }
-  });
-  const [wishlist, setWishlist] = useState(() => {
-    try { return JSON.parse(localStorage.getItem('bb_wishlist')) || []; } catch { return []; }
-  });
-  const [orders, setOrders] = useState(() => {
-    try { return JSON.parse(localStorage.getItem('bb_orders')) || []; } catch { return []; }
-  });
+  // Per-user key prefix — updates whenever currentUser changes
+  const userKey = (suffix) => `bb_${currentUser?.id || "guest"}_${suffix}`;
+
+  // Data state — per-user keys
+  const [cart, setCart] = useState(() =>
+    lsGet(`bb_${lsGet("bb_user", null)?.id || "guest"}_cart`, []),
+  );
+  const [wishlist, setWishlist] = useState(() =>
+    lsGet(`bb_${lsGet("bb_user", null)?.id || "guest"}_wishlist`, []),
+  );
+  const [orders, setOrders] = useState(() =>
+    lsGet(`bb_${lsGet("bb_user", null)?.id || "guest"}_orders`, []),
+  );
+  const [rewards, setRewards] = useState(() =>
+    lsGet(`bb_${lsGet("bb_user", null)?.id || "guest"}_rewards`, {
+      points: 0,
+      history: [],
+    }),
+  );
+  const [reviews, setReviews] = useState(() => lsGet("bb_reviews", [])); // reviews are global (social)
+
   const [products, setProducts] = useState(FAKE_PRODUCTS);
   const [categories, setCategories] = useState(FAKE_CATEGORIES);
   const [subCategories, setSubCategories] = useState(FAKE_SUBCATEGORIES);
   const [storeSettings, setStoreSettings] = useState(FAKE_STORE_SETTINGS);
-  const [groupOrders, setGroupOrders] = useState(() => {
-    try { return JSON.parse(localStorage.getItem('bb_groups')) || []; } catch { return []; }
-  });
-  const [rewards, setRewards] = useState(() => {
-    try { return JSON.parse(localStorage.getItem('bb_rewards')) || { points: 0, history: [] }; } catch { return { points: 0, history: [] }; }
-  });
-  const [reviews, setReviews] = useState(() => {
-    try { return JSON.parse(localStorage.getItem('bb_reviews')) || []; } catch { return []; }
-  });
+  const [groupOrders, setGroupOrders] = useState(() => lsGet("bb_groups", []));
 
-  // Persist to localStorage
-  useEffect(() => { localStorage.setItem('bb_cart', JSON.stringify(cart)); }, [cart]);
-  useEffect(() => { localStorage.setItem('bb_wishlist', JSON.stringify(wishlist)); }, [wishlist]);
-  useEffect(() => { localStorage.setItem('bb_orders', JSON.stringify(orders)); }, [orders]);
-  useEffect(() => { if (currentUser) localStorage.setItem('bb_user', JSON.stringify(currentUser)); else localStorage.removeItem('bb_user'); }, [currentUser]);
-  useEffect(() => { localStorage.setItem('bb_groups', JSON.stringify(groupOrders)); }, [groupOrders]);
-  useEffect(() => { localStorage.setItem('bb_rewards', JSON.stringify(rewards)); }, [rewards]);
-  useEffect(() => { localStorage.setItem('bb_reviews', JSON.stringify(reviews)); }, [reviews]);
+  // When user logs in/out — reload their personal data
+  useEffect(() => {
+    const uid = currentUser?.id || "guest";
+    setCart(lsGet(`bb_${uid}_cart`, []));
+    setWishlist(lsGet(`bb_${uid}_wishlist`, []));
+    setOrders(lsGet(`bb_${uid}_orders`, []));
+    setRewards(lsGet(`bb_${uid}_rewards`, { points: 0, history: [] }));
+  }, [currentUser?.id]);
+
+  // Persist to localStorage (per-user)
+  useEffect(() => {
+    lsSet(userKey("cart"), cart);
+  }, [cart, currentUser?.id]);
+  useEffect(() => {
+    lsSet(userKey("wishlist"), wishlist);
+  }, [wishlist, currentUser?.id]);
+  useEffect(() => {
+    lsSet(userKey("orders"), orders);
+  }, [orders, currentUser?.id]);
+  useEffect(() => {
+    lsSet(userKey("rewards"), rewards);
+  }, [rewards, currentUser?.id]);
+  useEffect(() => {
+    lsSet("bb_reviews", reviews);
+  }, [reviews]);
+  useEffect(() => {
+    lsSet("bb_groups", groupOrders);
+  }, [groupOrders]);
+  useEffect(() => {
+    if (currentUser) lsSet("bb_user", currentUser);
+    else localStorage.removeItem("bb_user");
+  }, [currentUser]);
 
   // ── Auth ───────────────────────────────────────────────────────────────────
   const login = (email, password) => {
     // Fake auth — admin if email contains 'admin'
-    const user = { id: 'u1', email, name: email.split('@')[0], role: email.includes('admin') ? 'admin' : 'user' };
+    const user = {
+      id: "u1",
+      email,
+      name: email.split("@")[0],
+      role: email.includes("admin") ? "admin" : "user",
+    };
     setCurrentUser(user);
     return user;
   };
   const signup = (name, email, password) => {
-    const user = { id: 'u' + Date.now(), email, name, role: 'user' };
+    const user = { id: "u" + Date.now(), email, name, role: "user" };
     setCurrentUser(user);
     return user;
   };
-  const logout = () => { setCurrentUser(null); setCart([]); setWishlist([]); };
+  const logout = () => {
+    setCurrentUser(null);
+    // Clear in-memory state; persisted data stays under user's key
+    setCart([]);
+    setWishlist([]);
+    setOrders([]);
+    setRewards({ points: 0, history: [] });
+  };
 
   // ── Cart ───────────────────────────────────────────────────────────────────
   const addToCart = (product, qty = 1) => {
-    setCart(prev => {
-      const existing = prev.find(i => i.product_id === product.id);
-      if (existing) return prev.map(i => i.product_id === product.id ? { ...i, quantity: i.quantity + qty } : i);
-      return [...prev, { id: 'ci' + Date.now(), product_id: product.id, product_name: product.name, product_image: product.image_url, price: product.price, quantity: qty }];
+    setCart((prev) => {
+      const existing = prev.find((i) => i.product_id === product.id);
+      if (existing)
+        return prev.map((i) =>
+          i.product_id === product.id
+            ? { ...i, quantity: i.quantity + qty }
+            : i,
+        );
+      return [
+        ...prev,
+        {
+          id: "ci" + Date.now(),
+          product_id: product.id,
+          product_name: product.name,
+          product_image: product.image_url,
+          price: product.price,
+          quantity: qty,
+        },
+      ];
     });
   };
   const addCustomToCart = (item) => {
-    setCart(prev => [...prev, { id: 'ci' + Date.now(), ...item }]);
+    setCart((prev) => [...prev, { id: "ci" + Date.now(), ...item }]);
   };
-  const updateCartQty = (id, qty) => setCart(prev => prev.map(i => i.id === id ? { ...i, quantity: qty } : i));
-  const removeFromCart = (id) => setCart(prev => prev.filter(i => i.id !== id));
+  const updateCartQty = (id, qty) =>
+    setCart((prev) =>
+      prev.map((i) => (i.id === id ? { ...i, quantity: qty } : i)),
+    );
+  const removeFromCart = (id) =>
+    setCart((prev) => prev.filter((i) => i.id !== id));
   const clearCart = () => setCart([]);
 
   // ── Wishlist ───────────────────────────────────────────────────────────────
   const toggleWishlist = (product) => {
-    setWishlist(prev => {
-      const exists = prev.find(w => w.product_id === product.id);
-      if (exists) return prev.filter(w => w.product_id !== product.id);
-      return [...prev, { id: 'wi' + Date.now(), product_id: product.id, product_name: product.name, product_image: product.image_url, price: product.price, category: product.category }];
+    setWishlist((prev) => {
+      const exists = prev.find((w) => w.product_id === product.id);
+      if (exists) return prev.filter((w) => w.product_id !== product.id);
+      return [
+        ...prev,
+        {
+          id: "wi" + Date.now(),
+          product_id: product.id,
+          product_name: product.name,
+          product_image: product.image_url,
+          price: product.price,
+          category: product.category,
+        },
+      ];
     });
   };
-  const isWishlisted = (productId) => wishlist.some(w => w.product_id === productId);
+  const isWishlisted = (productId) =>
+    wishlist.some((w) => w.product_id === productId);
 
   // ── Orders ─────────────────────────────────────────────────────────────────
   const placeOrder = (orderData) => {
-    const newOrder = { id: 'ord' + Date.now(), created_date: new Date().toISOString(), status: 'pending', ...orderData };
-    setOrders(prev => [newOrder, ...prev]);
+    const newOrder = {
+      id: "ord" + Date.now(),
+      created_date: new Date().toISOString(),
+      status: "pending",
+      ...orderData,
+    };
+    setOrders((prev) => [newOrder, ...prev]);
     // Earn points: 1 pt per $1 spent (rounded)
     const earnedPts = Math.floor(orderData.total || 0);
     if (earnedPts > 0) {
-      setRewards(prev => ({
+      setRewards((prev) => ({
         points: prev.points + earnedPts,
-        history: [{ label: `Order #${newOrder.id.slice(-6)}`, pts: earnedPts, date: new Date().toLocaleDateString() }, ...prev.history],
+        history: [
+          {
+            label: `Order #${newOrder.id.slice(-6)}`,
+            pts: earnedPts,
+            date: new Date().toLocaleDateString(),
+          },
+          ...prev.history,
+        ],
       }));
     }
     clearCart();
     return newOrder;
   };
-  const updateOrderStatus = (orderId, status) => setOrders(prev => prev.map(o => o.id === orderId ? { ...o, status } : o));
+  const updateOrderStatus = (orderId, status) =>
+    setOrders((prev) =>
+      prev.map((o) => (o.id === orderId ? { ...o, status } : o)),
+    );
 
   // ── Products (admin) ───────────────────────────────────────────────────────
-  const createProduct = (data) => { const p = { ...data, id: 'p' + Date.now() }; setProducts(prev => [...prev, p]); return p; };
-  const updateProduct = (id, data) => setProducts(prev => prev.map(p => p.id === id ? { ...p, ...data } : p));
-  const deleteProduct = (id) => setProducts(prev => prev.filter(p => p.id !== id));
+  const createProduct = (data) => {
+    const p = { ...data, id: "p" + Date.now() };
+    setProducts((prev) => [...prev, p]);
+    return p;
+  };
+  const updateProduct = (id, data) =>
+    setProducts((prev) =>
+      prev.map((p) => (p.id === id ? { ...p, ...data } : p)),
+    );
+  const deleteProduct = (id) =>
+    setProducts((prev) => prev.filter((p) => p.id !== id));
 
   // ── Categories (admin) ─────────────────────────────────────────────────────
-  const createCategory = (data) => { const c = { ...data, id: 'cat' + Date.now() }; setCategories(prev => [...prev, c]); return c; };
-  const updateCategory = (id, data) => setCategories(prev => prev.map(c => c.id === id ? { ...c, ...data } : c));
-  const deleteCategory = (id) => setCategories(prev => prev.filter(c => c.id !== id));
+  const createCategory = (data) => {
+    const c = { ...data, id: "cat" + Date.now() };
+    setCategories((prev) => [...prev, c]);
+    return c;
+  };
+  const updateCategory = (id, data) =>
+    setCategories((prev) =>
+      prev.map((c) => (c.id === id ? { ...c, ...data } : c)),
+    );
+  const deleteCategory = (id) =>
+    setCategories((prev) => prev.filter((c) => c.id !== id));
 
   // ── SubCategories (admin) ──────────────────────────────────────────────────
-  const createSubCategory = (data) => { const s = { ...data, id: 'sub' + Date.now() }; setSubCategories(prev => [...prev, s]); return s; };
-  const updateSubCategory = (id, data) => setSubCategories(prev => prev.map(s => s.id === id ? { ...s, ...data } : s));
-  const deleteSubCategory = (id) => setSubCategories(prev => prev.filter(s => s.id !== id));
+  const createSubCategory = (data) => {
+    const s = { ...data, id: "sub" + Date.now() };
+    setSubCategories((prev) => [...prev, s]);
+    return s;
+  };
+  const updateSubCategory = (id, data) =>
+    setSubCategories((prev) =>
+      prev.map((s) => (s.id === id ? { ...s, ...data } : s)),
+    );
+  const deleteSubCategory = (id) =>
+    setSubCategories((prev) => prev.filter((s) => s.id !== id));
 
   // ── Store settings (admin) ─────────────────────────────────────────────────
   const saveStoreSettings = (data) => setStoreSettings(data);
 
   // ── Group orders ───────────────────────────────────────────────────────────
-  const createGroupOrder = (data) => { const g = { ...data, id: 'grp' + Date.now(), created_date: new Date().toISOString() }; setGroupOrders(prev => [g, ...prev]); return g; };
-  const updateGroupOrder = (id, data) => { let updated; setGroupOrders(prev => prev.map(g => { if (g.id === id) { updated = { ...g, ...data }; return updated; } return g; })); return updated; };
-  const findGroupByCode = (code) => groupOrders.find(g => g.share_code === code.toUpperCase());
+  const createGroupOrder = (data) => {
+    const g = {
+      ...data,
+      id: "grp" + Date.now(),
+      created_date: new Date().toISOString(),
+    };
+    setGroupOrders((prev) => [g, ...prev]);
+    return g;
+  };
+  const updateGroupOrder = (id, data) => {
+    let updated;
+    setGroupOrders((prev) =>
+      prev.map((g) => {
+        if (g.id === id) {
+          updated = { ...g, ...data };
+          return updated;
+        }
+        return g;
+      }),
+    );
+    return updated;
+  };
+  const findGroupByCode = (code) =>
+    groupOrders.find((g) => g.share_code === code.toUpperCase());
 
   // ── Rewards ────────────────────────────────────────────────────────────────
   const redeemReward = (reward) => {
     if (rewards.points < reward.points) return;
-    setRewards(prev => ({
+    setRewards((prev) => ({
       points: prev.points - reward.points,
-      history: [{ label: `Redeemed: ${reward.name}`, pts: -reward.points, date: new Date().toLocaleDateString() }, ...prev.history],
+      history: [
+        {
+          label: `Redeemed: ${reward.name}`,
+          pts: -reward.points,
+          date: new Date().toLocaleDateString(),
+        },
+        ...prev.history,
+      ],
     }));
   };
   const applyRewardDiscount = (discountAmt) => {
@@ -1818,40 +1966,73 @@ export function AppProvider({ children }) {
 
   // ── Reviews ────────────────────────────────────────────────────────────────
   const addReview = (reviewData) => {
-    setReviews(prev => [{ id: 'rev' + Date.now(), ...reviewData }, ...prev]);
+    setReviews((prev) => [{ id: "rev" + Date.now(), ...reviewData }, ...prev]);
   };
   const getProductRating = (productId) => {
-    const pReviews = reviews.filter(r => r.product_id === productId);
+    const pReviews = reviews.filter((r) => r.product_id === productId);
     if (pReviews.length === 0) return null;
-    return { avg: pReviews.reduce((s, r) => s + r.rating, 0) / pReviews.length, count: pReviews.length };
+    return {
+      avg: pReviews.reduce((s, r) => s + r.rating, 0) / pReviews.length,
+      count: pReviews.length,
+    };
   };
 
   const cartCount = cart.reduce((s, i) => s + (i.quantity || 1), 0);
 
   return (
-    <AppContext.Provider value={{
-      // Auth
-      currentUser, login, signup, logout,
-      // Cart
-      cart, cartCount, addToCart, addCustomToCart, updateCartQty, removeFromCart, clearCart,
-      // Wishlist
-      wishlist, toggleWishlist, isWishlisted,
-      // Orders
-      orders, placeOrder, updateOrderStatus,
-      // Data
-      products, categories, subCategories, storeSettings,
-      // Admin
-      createProduct, updateProduct, deleteProduct,
-      createCategory, updateCategory, deleteCategory,
-      createSubCategory, updateSubCategory, deleteSubCategory,
-      saveStoreSettings,
-      // Group
-      groupOrders, createGroupOrder, updateGroupOrder, findGroupByCode,
-      // Rewards
-      rewards, redeemReward,
-      // Reviews
-      reviews, addReview, getProductRating,
-    }}>
+    <AppContext.Provider
+      value={{
+        // Auth
+        currentUser,
+        login,
+        signup,
+        logout,
+        // Cart
+        cart,
+        cartCount,
+        addToCart,
+        addCustomToCart,
+        updateCartQty,
+        removeFromCart,
+        clearCart,
+        // Wishlist
+        wishlist,
+        toggleWishlist,
+        isWishlisted,
+        // Orders
+        orders,
+        placeOrder,
+        updateOrderStatus,
+        // Data
+        products,
+        categories,
+        subCategories,
+        storeSettings,
+        // Admin
+        createProduct,
+        updateProduct,
+        deleteProduct,
+        createCategory,
+        updateCategory,
+        deleteCategory,
+        createSubCategory,
+        updateSubCategory,
+        deleteSubCategory,
+        saveStoreSettings,
+        // Group
+        groupOrders,
+        createGroupOrder,
+        updateGroupOrder,
+        findGroupByCode,
+        // Rewards
+        rewards,
+        redeemReward,
+        // Reviews
+        reviews,
+        addReview,
+        getProductRating,
+      }}
+    >
       {children}
     </AppContext.Provider>
   );
@@ -1859,6 +2040,6 @@ export function AppProvider({ children }) {
 
 export const useApp = () => {
   const ctx = useContext(AppContext);
-  if (!ctx) throw new Error('useApp must be used inside AppProvider');
+  if (!ctx) throw new Error("useApp must be used inside AppProvider");
   return ctx;
 };
