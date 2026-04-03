@@ -666,7 +666,7 @@ const FAKE_CATEGORIES = [
 // Updated FAKE_SUBCATEGORIES with CORRECT image URLs for all items
 
 const FAKE_SUBCATEGORIES = [
-  // ========== PIZZAS (All 10 pizzas) ==========
+  // ========== PIZZAS (All 10 pizzas with complete options) ==========
   {
     id: "sub1",
     category_id: "pizzas",
@@ -679,6 +679,35 @@ const FAKE_SUBCATEGORIES = [
     is_active: true,
     tag: "Classic",
     sizes: { '9"': 6.5, '12"': 9.99, '16"': 13.99 },
+    base_options: [
+      {
+        group_name: "Crust Type",
+        required: true,
+        select_type: "single",
+        options: [
+          { name: "Deep Pan", extra_price: 0 },
+          { name: "Thin Crust", extra_price: 0 },
+          { name: "Stuffed Crust", extra_price: 2.0 },
+        ],
+      },
+    ],
+    topping_groups: [
+      {
+        group_name: "Extra Toppings",
+        max_selections: 5,
+        options: [
+          { name: "Anchovies", extra_price: 1.5 },
+          { name: "Beef", extra_price: 2.0 },
+          { name: "Cajun Chicken", extra_price: 2.0 },
+          { name: "Cherry Tomatoes", extra_price: 1.0 },
+          { name: "Ham", extra_price: 1.5 },
+          { name: "Olives", extra_price: 1.0 },
+          { name: "Chicken Balti", extra_price: 2.5 },
+          { name: "Jalapeños", extra_price: 0.5 },
+          { name: "Extra Cheese", extra_price: 1.5 },
+        ],
+      },
+    ],
   },
   {
     id: "sub2",
@@ -693,6 +722,31 @@ const FAKE_SUBCATEGORIES = [
     is_active: true,
     tag: "Signature",
     sizes: { '9"': 8.99, '12"': 12.99, '16"': 16.99 },
+    base_options: [
+      {
+        group_name: "Crust Type",
+        required: true,
+        select_type: "single",
+        options: [
+          { name: "Deep Pan", extra_price: 0 },
+          { name: "Thin Crust", extra_price: 0 },
+          { name: "Stuffed Crust", extra_price: 2.0 },
+        ],
+      },
+    ],
+    topping_groups: [
+      {
+        group_name: "Extra Toppings",
+        max_selections: 5,
+        options: [
+          { name: "Extra Cheese", extra_price: 1.5 },
+          { name: "Jalapeños", extra_price: 0.5 },
+          { name: "Mushrooms", extra_price: 1.0 },
+          { name: "Olives", extra_price: 1.0 },
+          { name: "Extra Cajun Chicken", extra_price: 2.0 },
+        ],
+      },
+    ],
   },
   {
     id: "sub3",
@@ -706,6 +760,31 @@ const FAKE_SUBCATEGORIES = [
     is_active: true,
     tag: "Popular",
     sizes: { '9"': 7.99, '12"': 11.99, '16"': 16.99 },
+    base_options: [
+      {
+        group_name: "Crust Type",
+        required: true,
+        select_type: "single",
+        options: [
+          { name: "Deep Pan", extra_price: 0 },
+          { name: "Thin Crust", extra_price: 0 },
+          { name: "Stuffed Crust", extra_price: 2.0 },
+        ],
+      },
+    ],
+    topping_groups: [
+      {
+        group_name: "Extra Toppings",
+        max_selections: 5,
+        options: [
+          { name: "Extra Pepperoni", extra_price: 1.5 },
+          { name: "Extra Beef", extra_price: 1.5 },
+          { name: "Extra Ham", extra_price: 1.5 },
+          { name: "Extra Cheese", extra_price: 1.5 },
+          { name: "Jalapeños", extra_price: 0.5 },
+        ],
+      },
+    ],
   },
   {
     id: "sub4",
@@ -718,6 +797,30 @@ const FAKE_SUBCATEGORIES = [
     sort_order: 4,
     is_active: true,
     sizes: { '9"': 7.99, '12"': 11.99, '16"': 16.99 },
+    base_options: [
+      {
+        group_name: "Crust Type",
+        required: true,
+        select_type: "single",
+        options: [
+          { name: "Deep Pan", extra_price: 0 },
+          { name: "Thin Crust", extra_price: 0 },
+          { name: "Stuffed Crust", extra_price: 2.0 },
+        ],
+      },
+    ],
+    topping_groups: [
+      {
+        group_name: "Extra Toppings",
+        max_selections: 5,
+        options: [
+          { name: "Extra Chicken Balti", extra_price: 2.0 },
+          { name: "Jalapeños", extra_price: 0.5 },
+          { name: "Extra Cheese", extra_price: 1.5 },
+          { name: "Mushrooms", extra_price: 1.0 },
+        ],
+      },
+    ],
   },
   {
     id: "sub5",
@@ -731,6 +834,30 @@ const FAKE_SUBCATEGORIES = [
     sort_order: 5,
     is_active: true,
     sizes: { '9"': 7.99, '12"': 11.99, '16"': 16.99 },
+    base_options: [
+      {
+        group_name: "Crust Type",
+        required: true,
+        select_type: "single",
+        options: [
+          { name: "Deep Pan", extra_price: 0 },
+          { name: "Thin Crust", extra_price: 0 },
+          { name: "Stuffed Crust", extra_price: 2.0 },
+        ],
+      },
+    ],
+    topping_groups: [
+      {
+        group_name: "Extra Toppings",
+        max_selections: 5,
+        options: [
+          { name: "Extra Cheese", extra_price: 1.5 },
+          { name: "Jalapeños", extra_price: 0.5 },
+          { name: "Mushrooms", extra_price: 1.0 },
+          { name: "Extra Chicken", extra_price: 2.0 },
+        ],
+      },
+    ],
   },
   {
     id: "sub6",
@@ -745,6 +872,30 @@ const FAKE_SUBCATEGORIES = [
     is_active: true,
     tag: "Spicy",
     sizes: { '9"': 8.99, '12"': 12.99, '16"': 16.99 },
+    base_options: [
+      {
+        group_name: "Crust Type",
+        required: true,
+        select_type: "single",
+        options: [
+          { name: "Deep Pan", extra_price: 0 },
+          { name: "Thin Crust", extra_price: 0 },
+          { name: "Stuffed Crust", extra_price: 2.0 },
+        ],
+      },
+    ],
+    topping_groups: [
+      {
+        group_name: "Extra Toppings",
+        max_selections: 5,
+        options: [
+          { name: "Extra Jalapeños", extra_price: 0.5 },
+          { name: "Extra Green Chillies", extra_price: 0.5 },
+          { name: "Extra Cheese", extra_price: 1.5 },
+          { name: "Extra Chicken Tikka", extra_price: 2.0 },
+        ],
+      },
+    ],
   },
   {
     id: "sub7",
@@ -757,9 +908,31 @@ const FAKE_SUBCATEGORIES = [
     sort_order: 7,
     is_active: true,
     sizes: { '9"': 8.99, '12"': 12.99, '16"': 16.99 },
+    base_options: [
+      {
+        group_name: "Crust Type",
+        required: true,
+        select_type: "single",
+        options: [
+          { name: "Deep Pan", extra_price: 0 },
+          { name: "Thin Crust", extra_price: 0 },
+          { name: "Stuffed Crust", extra_price: 2.0 },
+        ],
+      },
+    ],
+    topping_groups: [
+      {
+        group_name: "Extra Toppings",
+        max_selections: 5,
+        options: [
+          { name: "Extra Cajun Chicken", extra_price: 2.0 },
+          { name: "Jalapeños", extra_price: 0.5 },
+          { name: "Extra Cheese", extra_price: 1.5 },
+          { name: "Mushrooms", extra_price: 1.0 },
+        ],
+      },
+    ],
   },
-
-  // VEGGIE SUPREME - Fixed Image URL
   {
     id: "sub8",
     category_id: "pizzas",
@@ -773,8 +946,32 @@ const FAKE_SUBCATEGORIES = [
     is_active: true,
     tag: "Vegetarian",
     sizes: { '9"': 7.99, '12"': 11.99, '16"': 16.99 },
+    base_options: [
+      {
+        group_name: "Crust Type",
+        required: true,
+        select_type: "single",
+        options: [
+          { name: "Deep Pan", extra_price: 0 },
+          { name: "Thin Crust", extra_price: 0 },
+          { name: "Stuffed Crust", extra_price: 2.0 },
+        ],
+      },
+    ],
+    topping_groups: [
+      {
+        group_name: "Extra Toppings",
+        max_selections: 5,
+        options: [
+          { name: "Mushrooms", extra_price: 1.0 },
+          { name: "Olives", extra_price: 1.0 },
+          { name: "Jalapeños", extra_price: 0.5 },
+          { name: "Extra Cheese", extra_price: 1.5 },
+          { name: "Sweetcorn", extra_price: 1.0 },
+        ],
+      },
+    ],
   },
-
   {
     id: "sub9",
     category_id: "pizzas",
@@ -786,6 +983,30 @@ const FAKE_SUBCATEGORIES = [
     sort_order: 9,
     is_active: true,
     sizes: { '9"': 7.99, '12"': 11.99, '16"': 16.99 },
+    base_options: [
+      {
+        group_name: "Crust Type",
+        required: true,
+        select_type: "single",
+        options: [
+          { name: "Deep Pan", extra_price: 0 },
+          { name: "Thin Crust", extra_price: 0 },
+          { name: "Stuffed Crust", extra_price: 2.0 },
+        ],
+      },
+    ],
+    topping_groups: [
+      {
+        group_name: "Extra Toppings",
+        max_selections: 5,
+        options: [
+          { name: "Extra Tuna", extra_price: 1.5 },
+          { name: "Extra Prawns", extra_price: 2.0 },
+          { name: "Extra Anchovies", extra_price: 1.5 },
+          { name: "Extra Cheese", extra_price: 1.5 },
+        ],
+      },
+    ],
   },
   {
     id: "sub10",
@@ -799,9 +1020,33 @@ const FAKE_SUBCATEGORIES = [
     is_active: true,
     tag: "Classic",
     sizes: { '9"': 7.99, '12"': 11.99, '16"': 16.99 },
+    base_options: [
+      {
+        group_name: "Crust Type",
+        required: true,
+        select_type: "single",
+        options: [
+          { name: "Deep Pan", extra_price: 0 },
+          { name: "Thin Crust", extra_price: 0 },
+          { name: "Stuffed Crust", extra_price: 2.0 },
+        ],
+      },
+    ],
+    topping_groups: [
+      {
+        group_name: "Extra Toppings",
+        max_selections: 5,
+        options: [
+          { name: "Extra Ham", extra_price: 1.5 },
+          { name: "Extra Pineapple", extra_price: 1.0 },
+          { name: "Extra Cheese", extra_price: 1.5 },
+          { name: "Jalapeños", extra_price: 0.5 },
+        ],
+      },
+    ],
   },
 
-  // ========== BURGERS (All 5 burgers) ==========
+  // ========== BURGERS (All 5 burgers with options) ==========
   {
     id: "sub11",
     category_id: "burgers",
@@ -813,6 +1058,33 @@ const FAKE_SUBCATEGORIES = [
     sort_order: 1,
     is_active: true,
     tag: "Popular",
+    base_options: [
+      {
+        group_name: "Sauce",
+        required: true,
+        select_type: "single",
+        options: [
+          { name: "Mayo", extra_price: 0 },
+          { name: "Ketchup", extra_price: 0 },
+          { name: "BBQ", extra_price: 0 },
+          { name: "Sriracha", extra_price: 0 },
+          { name: "Garlic Sauce", extra_price: 0 },
+        ],
+      },
+    ],
+    topping_groups: [
+      {
+        group_name: "Extras",
+        max_selections: 4,
+        options: [
+          { name: "Extra Cheese", extra_price: 0.75 },
+          { name: "Bacon", extra_price: 1.5 },
+          { name: "Jalapeños", extra_price: 0.5 },
+          { name: "Onion Rings", extra_price: 1.0 },
+          { name: "Fried Egg", extra_price: 1.0 },
+        ],
+      },
+    ],
   },
   {
     id: "sub12",
@@ -825,6 +1097,32 @@ const FAKE_SUBCATEGORIES = [
       "https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=400&h=300&fit=crop",
     sort_order: 2,
     is_active: true,
+    base_options: [
+      {
+        group_name: "Sauce",
+        required: true,
+        select_type: "single",
+        options: [
+          { name: "Mayo", extra_price: 0 },
+          { name: "Ketchup", extra_price: 0 },
+          { name: "BBQ", extra_price: 0 },
+          { name: "Mustard", extra_price: 0 },
+        ],
+      },
+    ],
+    topping_groups: [
+      {
+        group_name: "Extras",
+        max_selections: 4,
+        options: [
+          { name: "Bacon", extra_price: 1.5 },
+          { name: "Avocado", extra_price: 1.0 },
+          { name: "Fried Egg", extra_price: 1.0 },
+          { name: "Jalapeños", extra_price: 0.5 },
+          { name: "Extra Cheese", extra_price: 0.75 },
+        ],
+      },
+    ],
   },
   {
     id: "sub13",
@@ -836,9 +1134,31 @@ const FAKE_SUBCATEGORIES = [
       "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop",
     sort_order: 3,
     is_active: true,
+    base_options: [
+      {
+        group_name: "Sauce",
+        required: true,
+        select_type: "single",
+        options: [
+          { name: "Mayo", extra_price: 0 },
+          { name: "Ketchup", extra_price: 0 },
+          { name: "BBQ", extra_price: 0 },
+        ],
+      },
+    ],
+    topping_groups: [
+      {
+        group_name: "Extras",
+        max_selections: 4,
+        options: [
+          { name: "Cheese", extra_price: 0.75 },
+          { name: "Bacon", extra_price: 1.5 },
+          { name: "Fried Egg", extra_price: 1.0 },
+          { name: "Jalapeños", extra_price: 0.5 },
+        ],
+      },
+    ],
   },
-
-  // KEBAB BURGER - Fixed Image URL
   {
     id: "sub14",
     category_id: "burgers",
@@ -850,8 +1170,32 @@ const FAKE_SUBCATEGORIES = [
       "https://hips.hearstapps.com/hmg-prod/images/persian-burgers-68964eb5144c6.png?crop=0.675xw:0.968xh;0.0748xw,0&resize=640:*",
     sort_order: 4,
     is_active: true,
+    base_options: [
+      {
+        group_name: "Sauce",
+        required: true,
+        select_type: "single",
+        options: [
+          { name: "Garlic Sauce", extra_price: 0 },
+          { name: "Chilli Sauce", extra_price: 0 },
+          { name: "BBQ", extra_price: 0 },
+          { name: "Mix Sauce", extra_price: 0 },
+        ],
+      },
+    ],
+    topping_groups: [
+      {
+        group_name: "Extras",
+        max_selections: 4,
+        options: [
+          { name: "Extra Kebab Meat", extra_price: 1.5 },
+          { name: "Cheese", extra_price: 0.75 },
+          { name: "Jalapeños", extra_price: 0.5 },
+          { name: "Onion Rings", extra_price: 1.0 },
+        ],
+      },
+    ],
   },
-
   {
     id: "sub15",
     category_id: "burgers",
@@ -863,9 +1207,33 @@ const FAKE_SUBCATEGORIES = [
     sort_order: 5,
     is_active: true,
     tag: "Vegetarian",
+    base_options: [
+      {
+        group_name: "Sauce",
+        required: true,
+        select_type: "single",
+        options: [
+          { name: "Vegan Mayo", extra_price: 0 },
+          { name: "Ketchup", extra_price: 0 },
+          { name: "BBQ", extra_price: 0 },
+        ],
+      },
+    ],
+    topping_groups: [
+      {
+        group_name: "Extras",
+        max_selections: 4,
+        options: [
+          { name: "Avocado", extra_price: 1.0 },
+          { name: "Jalapeños", extra_price: 0.5 },
+          { name: "Onion Rings", extra_price: 1.0 },
+          { name: "Vegan Cheese", extra_price: 0.75 },
+        ],
+      },
+    ],
   },
 
-  // ========== SPECIAL OFFERS (All 4 offers) ==========
+  // ========== SPECIAL OFFERS (All 4 offers - no extra options needed) ==========
   {
     id: "sub16",
     category_id: "offers",
@@ -916,7 +1284,7 @@ const FAKE_SUBCATEGORIES = [
     tag: "Party Deal",
   },
 
-  // ========== KEBABS & PIRI PIRI (All 4 items) ==========
+  // ========== KEBABS & PIRI PIRI (All 4 items with options) ==========
   {
     id: "sub20",
     category_id: "kebabs",
@@ -928,9 +1296,32 @@ const FAKE_SUBCATEGORIES = [
     sort_order: 1,
     is_active: true,
     tag: "Popular",
+    base_options: [
+      {
+        group_name: "Sauce",
+        required: true,
+        select_type: "single",
+        options: [
+          { name: "Garlic Sauce", extra_price: 0 },
+          { name: "Chilli Sauce", extra_price: 0 },
+          { name: "Mix", extra_price: 0 },
+          { name: "BBQ", extra_price: 0 },
+        ],
+      },
+    ],
+    topping_groups: [
+      {
+        group_name: "Extras",
+        max_selections: 3,
+        options: [
+          { name: "Extra Meat", extra_price: 2.0 },
+          { name: "Cheese", extra_price: 0.75 },
+          { name: "Jalapeños", extra_price: 0.5 },
+          { name: "Extra Salad", extra_price: 0.5 },
+        ],
+      },
+    ],
   },
-
-  // CHICKEN TIKKA KEBAB - Fixed Image URL
   {
     id: "sub21",
     category_id: "kebabs",
@@ -941,8 +1332,32 @@ const FAKE_SUBCATEGORIES = [
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYvvTwgNamD4TDBp4EYolAnlxmRjbCJcf1JA&s",
     sort_order: 2,
     is_active: true,
+    base_options: [
+      {
+        group_name: "Sauce",
+        required: true,
+        select_type: "single",
+        options: [
+          { name: "Garlic Sauce", extra_price: 0 },
+          { name: "Chilli Sauce", extra_price: 0 },
+          { name: "Mint Yogurt", extra_price: 0 },
+          { name: "Mix", extra_price: 0 },
+        ],
+      },
+    ],
+    topping_groups: [
+      {
+        group_name: "Extras",
+        max_selections: 3,
+        options: [
+          { name: "Extra Chicken Tikka", extra_price: 2.0 },
+          { name: "Cheese", extra_price: 0.75 },
+          { name: "Jalapeños", extra_price: 0.5 },
+          { name: "Onions", extra_price: 0.5 },
+        ],
+      },
+    ],
   },
-
   {
     id: "sub22",
     category_id: "kebabs",
@@ -954,6 +1369,30 @@ const FAKE_SUBCATEGORIES = [
     sort_order: 3,
     is_active: true,
     tag: "Signature",
+    base_options: [
+      {
+        group_name: "Spice Level",
+        required: true,
+        select_type: "single",
+        options: [
+          { name: "Mild", extra_price: 0 },
+          { name: "Medium", extra_price: 0 },
+          { name: "Hot", extra_price: 0 },
+          { name: "Extra Hot", extra_price: 0 },
+        ],
+      },
+    ],
+    topping_groups: [
+      {
+        group_name: "Extras",
+        max_selections: 3,
+        options: [
+          { name: "Extra Chips", extra_price: 2.0 },
+          { name: "Extra Sauce", extra_price: 0.5 },
+          { name: "Coleslaw", extra_price: 1.0 },
+        ],
+      },
+    ],
   },
   {
     id: "sub23",
@@ -965,9 +1404,31 @@ const FAKE_SUBCATEGORIES = [
       "https://images.unsplash.com/photo-1626645738196-c2a7c87a8f58?w=400&h=300&fit=crop",
     sort_order: 4,
     is_active: true,
+    base_options: [
+      {
+        group_name: "Spice Level",
+        required: true,
+        select_type: "single",
+        options: [
+          { name: "Mild", extra_price: 0 },
+          { name: "Medium", extra_price: 0 },
+          { name: "Hot", extra_price: 0 },
+        ],
+      },
+    ],
+    topping_groups: [
+      {
+        group_name: "Extras",
+        max_selections: 3,
+        options: [
+          { name: "Extra Chips", extra_price: 2.0 },
+          { name: "Extra Sauce", extra_price: 0.5 },
+        ],
+      },
+    ],
   },
 
-  // ========== SIDES (All 9 sides) ==========
+  // ========== SIDES (All 9 sides - some with options) ==========
   {
     id: "sub24",
     category_id: "sides",
@@ -979,8 +1440,6 @@ const FAKE_SUBCATEGORIES = [
     sort_order: 1,
     is_active: true,
   },
-
-  // POTATO WEDGES - Fixed Image URL
   {
     id: "sub25",
     category_id: "sides",
@@ -993,7 +1452,6 @@ const FAKE_SUBCATEGORIES = [
     is_active: true,
     tag: "Vegetarian",
   },
-
   {
     id: "sub26",
     category_id: "sides",
@@ -1005,6 +1463,20 @@ const FAKE_SUBCATEGORIES = [
     sort_order: 3,
     is_active: true,
     tag: "Popular",
+    base_options: [
+      {
+        group_name: "Sauce",
+        required: true,
+        select_type: "single",
+        options: [
+          { name: "Plain", extra_price: 0 },
+          { name: "Buffalo", extra_price: 0 },
+          { name: "BBQ", extra_price: 0 },
+          { name: "Piri Piri", extra_price: 0 },
+          { name: "Garlic", extra_price: 0 },
+        ],
+      },
+    ],
   },
   {
     id: "sub27",
@@ -1018,8 +1490,6 @@ const FAKE_SUBCATEGORIES = [
     is_active: true,
     tag: "Vegetarian",
   },
-
-  // GARLIC BREAD - Fixed Image URL
   {
     id: "sub28",
     category_id: "sides",
@@ -1032,21 +1502,18 @@ const FAKE_SUBCATEGORIES = [
     is_active: true,
     tag: "Vegetarian",
   },
-
-  // GARLIC BREAD WITH CHEESE - Fixed Image URL
   {
     id: "sub29",
     category_id: "sides",
     name: "Garlic Bread with Cheese",
     description: "Garlic bread topped with melted cheese",
     base_price: 4.49,
-    image_url: "https://homecookedharvest.com/wp-content/uploads/2022/06/Stuffed-Garlic-Bread-G.jpg",
+    image_url:
+      "https://homecookedharvest.com/wp-content/uploads/2022/06/Stuffed-Garlic-Bread-G.jpg",
     sort_order: 6,
     is_active: true,
     tag: "Vegetarian",
   },
-
-  // STUFFED GARLIC BREAD - Fixed Image URL
   {
     id: "sub30",
     category_id: "sides",
@@ -1058,23 +1525,31 @@ const FAKE_SUBCATEGORIES = [
     sort_order: 7,
     is_active: true,
     tag: "Popular",
+    base_options: [
+      {
+        group_name: "Filling",
+        required: true,
+        select_type: "single",
+        options: [
+          { name: "Cheese Only", extra_price: 0 },
+          { name: "Cheese & Chicken", extra_price: 2.0 },
+          { name: "Cheese & Beef", extra_price: 2.0 },
+          { name: "Cheese & Veggie", extra_price: 1.5 },
+        ],
+      },
+    ],
   },
-
-  // RICE - Fixed Image URL
   {
     id: "sub31",
     category_id: "sides",
     name: "Rice",
     description: "Steamed basmati rice",
     base_price: 2.99,
-    image_url:
-      "https://media.soscuisine.com/images/recettes/large/2887.jpg",
+    image_url: "https://media.soscuisine.com/images/recettes/large/2887.jpg",
     sort_order: 8,
     is_active: true,
     tag: "Vegan",
   },
-
-  // NAAN BREAD - Fixed Image URL
   {
     id: "sub32",
     category_id: "sides",
@@ -1086,9 +1561,22 @@ const FAKE_SUBCATEGORIES = [
     sort_order: 9,
     is_active: true,
     tag: "Vegetarian",
+    base_options: [
+      {
+        group_name: "Type",
+        required: true,
+        select_type: "single",
+        options: [
+          { name: "Plain Naan", extra_price: 0 },
+          { name: "Garlic Naan", extra_price: 0.5 },
+          { name: "Cheese Naan", extra_price: 1.0 },
+          { name: "Peshawari Naan", extra_price: 1.0 },
+        ],
+      },
+    ],
   },
 
-  // ========== DRINKS & DESSERTS (All 4 items) ==========
+  // ========== DRINKS & DESSERTS (All 4 items with options) ==========
   {
     id: "sub33",
     category_id: "drinks",
@@ -1100,9 +1588,21 @@ const FAKE_SUBCATEGORIES = [
     sort_order: 1,
     is_active: true,
     tag: "Vegan",
+    base_options: [
+      {
+        group_name: "Flavour",
+        required: true,
+        select_type: "single",
+        options: [
+          { name: "Coca-Cola", extra_price: 0 },
+          { name: "Sprite", extra_price: 0 },
+          { name: "Fanta Orange", extra_price: 0 },
+          { name: "Pepsi", extra_price: 0 },
+          { name: "7-Up", extra_price: 0 },
+        ],
+      },
+    ],
   },
-
-  // BOTTLE (1.5L) - Fixed Image URL
   {
     id: "sub34",
     category_id: "drinks",
@@ -1114,8 +1614,21 @@ const FAKE_SUBCATEGORIES = [
     sort_order: 2,
     is_active: true,
     tag: "Vegan",
+    base_options: [
+      {
+        group_name: "Flavour",
+        required: true,
+        select_type: "single",
+        options: [
+          { name: "Coca-Cola", extra_price: 0 },
+          { name: "Sprite", extra_price: 0 },
+          { name: "Fanta Orange", extra_price: 0 },
+          { name: "Pepsi", extra_price: 0 },
+          { name: "Fruit Juice", extra_price: 0 },
+        ],
+      },
+    ],
   },
-
   {
     id: "sub35",
     category_id: "drinks",
@@ -1127,6 +1640,18 @@ const FAKE_SUBCATEGORIES = [
     sort_order: 3,
     is_active: true,
     tag: "Dessert",
+    base_options: [
+      {
+        group_name: "With Ice Cream",
+        required: false,
+        select_type: "single",
+        options: [
+          { name: "Without Ice Cream", extra_price: 0 },
+          { name: "With Vanilla Ice Cream", extra_price: 1.0 },
+          { name: "With Chocolate Ice Cream", extra_price: 1.0 },
+        ],
+      },
+    ],
   },
   {
     id: "sub36",
@@ -1142,105 +1667,9 @@ const FAKE_SUBCATEGORIES = [
   },
 ];
 
-const FAKE_REVIEWS = [
-  {
-    id: "rev1",
-    product_id: 1,
-    user_name: "John D.",
-    rating: 5,
-    comment: "Best margherita in town! The crust was perfect.",
-    date: "2024-03-15",
-    is_verified: true,
-  },
-  {
-    id: "rev2",
-    product_id: 2,
-    user_name: "Sarah M.",
-    rating: 5,
-    comment:
-      "Jini's Special is absolutely amazing! Great combination of flavors.",
-    date: "2024-03-10",
-    is_verified: true,
-  },
-  {
-    id: "rev3",
-    product_id: 3,
-    user_name: "Mike R.",
-    rating: 4,
-    comment: "Meat Feast is loaded with toppings. Very filling!",
-    date: "2024-03-12",
-    is_verified: true,
-  },
-  {
-    id: "rev4",
-    product_id: 20,
-    user_name: "Emma L.",
-    rating: 5,
-    comment: "The chicken fillet burger is crispy and juicy!",
-    date: "2024-03-08",
-    is_verified: true,
-  },
-  {
-    id: "rev5",
-    product_id: 40,
-    user_name: "David K.",
-    rating: 5,
-    comment: "Best lamb donner in town. Highly recommended!",
-    date: "2024-03-05",
-    is_verified: true,
-  },
-  {
-    id: "rev6",
-    product_id: 42,
-    user_name: "Lisa W.",
-    rating: 5,
-    comment: "The piri piri chicken is a must try! So flavorful.",
-    date: "2024-03-01",
-    is_verified: true,
-  },
-];
-
-// const FAKE_REVIEWS = [
-//   { id: "rev1", product_id: 1, user_name: "John D.", rating: 5, comment: "Best margherita in town! The crust was perfect.", date: "2024-03-15", is_verified: true },
-//   { id: "rev2", product_id: 2, user_name: "Sarah M.", rating: 5, comment: "Jini's Special is absolutely amazing! Great combination of flavors.", date: "2024-03-10", is_verified: true },
-//   { id: "rev3", product_id: 20, user_name: "Mike R.", rating: 4, comment: "Crispy chicken fillet and good portion size.", date: "2024-03-12", is_verified: true },
-//   { id: "rev4", product_id: 42, user_name: "Emma L.", rating: 5, comment: "The piri piri chicken is a must try! So flavorful.", date: "2024-03-08", is_verified: true },
-// ];
-
-// data 1
-// const FAKE_PRODUCTS = [
-//   { id: 'p1', name: 'Classic Smash Burger', description: 'Double patty, melted cheddar, pickles, secret sauce on a brioche bun', price: 9.99, category: 'burgers', image_url: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop', is_featured: true, is_available: true, spice_level: 'mild', calories: 650, prep_time_mins: 8 },
-//   { id: 'p2', name: 'Spicy Chicken Burger', description: 'Crispy chicken fillet, jalapeños, sriracha mayo, coleslaw', price: 10.49, category: 'burgers', image_url: 'https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=400&h=300&fit=crop', is_featured: false, is_available: true, spice_level: 'hot', calories: 580, prep_time_mins: 10 },
-//   { id: 'p3', name: 'BBQ Bacon Burger', description: 'Angus beef, crispy bacon, smoky BBQ sauce, onion rings', price: 12.99, category: 'burgers', image_url: 'https://images.unsplash.com/photo-1553979459-d2229ba7433b?w=400&h=300&fit=crop', is_featured: true, is_available: true, spice_level: 'medium', calories: 820, prep_time_mins: 12 },
-//   { id: 'p4', name: 'Margherita Pizza', description: 'Fresh mozzarella, tomato sauce, basil on thin crust', price: 11.99, category: 'pizzas', image_url: 'https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?w=400&h=300&fit=crop', is_featured: false, is_available: true, spice_level: 'mild', calories: 720, prep_time_mins: 15 },
-//   { id: 'p5', name: 'Pepperoni Pizza', description: 'Loaded pepperoni, mozzarella, oregano, classic tomato base', price: 13.49, category: 'pizzas', image_url: 'https://images.unsplash.com/photo-1628840042765-356cda07504e?w=400&h=300&fit=crop', is_featured: true, is_available: true, spice_level: 'medium', calories: 860, prep_time_mins: 15 },
-//   { id: 'p6', name: 'Loaded Fries', description: 'Crispy fries topped with cheese sauce, bacon bits, and chives', price: 5.99, category: 'sides', image_url: 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400&h=300&fit=crop', is_featured: false, is_available: true, calories: 450, prep_time_mins: 5 },
-//   { id: 'p7', name: 'Chicken Wings (8pc)', description: 'Crispy wings tossed in buffalo sauce, with blue cheese dip', price: 8.99, category: 'sides', image_url: 'https://images.unsplash.com/photo-1567620832903-9fc6debc209f?w=400&h=300&fit=crop', is_featured: true, is_available: true, spice_level: 'extra_hot', calories: 680, prep_time_mins: 12 },
-//   { id: 'p8', name: 'Strawberry Milkshake', description: 'Thick creamy milkshake with real strawberries and whipped cream', price: 5.49, category: 'drinks', image_url: 'https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=400&h=300&fit=crop', is_featured: true, is_available: true, calories: 420, prep_time_mins: 3 },
-//   { id: 'p9', name: 'Coca Cola', description: 'Ice-cold classic Coca Cola, 500ml', price: 2.49, category: 'drinks', image_url: 'https://images.unsplash.com/photo-1629203851122-3726ecdf080e?w=400&h=300&fit=crop', is_featured: false, is_available: true, calories: 200, prep_time_mins: 1 },
-//   { id: 'p10', name: 'Chocolate Brownie', description: 'Warm fudge brownie with vanilla ice cream and chocolate sauce', price: 6.99, category: 'desserts', image_url: 'https://images.unsplash.com/photo-1564355808539-22fda35bed7e?w=400&h=300&fit=crop', is_featured: false, is_available: true, calories: 520, prep_time_mins: 5 },
-//   { id: 'p11', name: 'Burger Combo', description: 'Classic Smash Burger + Loaded Fries + Drink — save $3!', price: 15.49, category: 'combos', image_url: 'https://images.unsplash.com/photo-1550547660-d9450f859349?w=400&h=300&fit=crop', is_featured: true, is_available: true, spice_level: 'mild', calories: 1100, prep_time_mins: 10 },
-//   { id: 'p12', name: 'Onion Rings', description: 'Beer-battered crispy onion rings with ranch dip', price: 4.99, category: 'sides', image_url: 'https://images.unsplash.com/photo-1639024471283-03518883512d?w=400&h=300&fit=crop', is_featured: false, is_available: true, calories: 380, prep_time_mins: 5 },
-// ];
-//
-// const FAKE_CATEGORIES = [
-//   { id: 'cat1', name: 'Pizzas', description: 'Freshly baked stone-oven pizzas', icon_emoji: '🍕', image_url: 'https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?w=400&h=300&fit=crop', sort_order: 1, is_active: true },
-//   { id: 'cat2', name: 'Burgers', description: 'Juicy smash burgers & gourmet stacks', icon_emoji: '🍔', image_url: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop', sort_order: 2, is_active: true },
-//   { id: 'cat3', name: 'Special Offers', description: 'Limited time deals you can\'t miss', icon_emoji: '🎉', image_url: 'https://images.unsplash.com/photo-1550547660-d9450f859349?w=400&h=300&fit=crop', sort_order: 3, is_active: true, badge: 'Hot Deals' },
-//   { id: 'cat4', name: 'Sides & Snacks', description: 'Fries, wings, onion rings and more', icon_emoji: '🍟', image_url: 'https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=400&h=300&fit=crop', sort_order: 4, is_active: true },
-//   { id: 'cat5', name: 'Drinks', description: 'Refreshing cold drinks & shakes', icon_emoji: '🥤', image_url: 'https://images.unsplash.com/photo-1629203851122-3726ecdf080e?w=400&h=300&fit=crop', sort_order: 5, is_active: true },
-//   { id: 'cat6', name: 'Desserts', description: 'Sweet treats to end your meal', icon_emoji: '🎂', image_url: 'https://images.unsplash.com/photo-1564355808539-22fda35bed7e?w=400&h=300&fit=crop', sort_order: 6, is_active: true },
-// ];
-//
-// const FAKE_SUBCATEGORIES = [
-//   { id: 'sub1', category_id: 'cat1', name: 'Margherita 16 inch', description: 'Served with mozzarella, tomato sauce and fresh basil', base_price: 13.99, image_url: 'https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?w=400&h=300&fit=crop', sort_order: 1, is_active: true, base_options: [{ group_name: 'Crust Type', required: true, select_type: 'single', options: [{ name: 'Deep Pan', extra_price: 0 }, { name: 'Thin Crust', extra_price: 0 }, { name: 'Stuffed Crust', extra_price: 2.0 }] }], topping_groups: [{ group_name: 'Extra Toppings', max_selections: 5, options: [{ name: 'Anchovies', extra_price: 1.5 }, { name: 'Beef', extra_price: 2.0 }, { name: 'Cajun Chicken', extra_price: 2.0 }, { name: 'Cherry Tomatoes', extra_price: 1.0 }, { name: 'Ham', extra_price: 1.5 }, { name: 'Olives', extra_price: 1.0 }, { name: 'Chicken Balti', extra_price: 2.5 }, { name: 'Jalapeños', extra_price: 0.5 }, { name: 'Extra Cheese', extra_price: 1.5 }] }] },
-//   { id: 'sub2', category_id: 'cat1', name: 'Margherita 9 inch', description: 'Served with mozzarella, tomato sauce and fresh basil', base_price: 8.99, image_url: 'https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?w=400&h=300&fit=crop', sort_order: 2, is_active: true, base_options: [{ group_name: 'Crust Type', required: true, select_type: 'single', options: [{ name: 'Deep Pan', extra_price: 0 }, { name: 'Thin Crust', extra_price: 0 }, { name: 'Stuffed Crust', extra_price: 1.5 }] }], topping_groups: [{ group_name: 'Extra Toppings', max_selections: 4, options: [{ name: 'Anchovies', extra_price: 1.0 }, { name: 'Beef', extra_price: 1.5 }, { name: 'Cherry Tomatoes', extra_price: 0.75 }, { name: 'Ham', extra_price: 1.0 }, { name: 'Olives', extra_price: 0.75 }, { name: 'Extra Cheese', extra_price: 1.0 }] }] },
-//   { id: 'sub3', category_id: 'cat1', name: 'Pepperoni 16 inch', description: 'Loaded with pepperoni, mozzarella and oregano', base_price: 15.99, image_url: 'https://images.unsplash.com/photo-1628840042765-356cda07504e?w=400&h=300&fit=crop', sort_order: 3, is_active: true, base_options: [{ group_name: 'Crust Type', required: true, select_type: 'single', options: [{ name: 'Deep Pan', extra_price: 0 }, { name: 'Thin Crust', extra_price: 0 }, { name: 'Stuffed Crust', extra_price: 2.0 }] }], topping_groups: [{ group_name: 'Extra Toppings', max_selections: 5, options: [{ name: 'Anchovies', extra_price: 1.5 }, { name: 'Extra Beef', extra_price: 2.0 }, { name: 'Cherry Tomatoes', extra_price: 1.0 }, { name: 'Ham', extra_price: 1.5 }, { name: 'Jalapeños', extra_price: 0.5 }, { name: 'Extra Cheese', extra_price: 1.5 }] }] },
-//   { id: 'sub4', category_id: 'cat2', name: 'Classic Smash Burger', description: 'Double patty, melted cheddar, pickles, secret sauce', base_price: 9.99, image_url: 'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=400&h=300&fit=crop', sort_order: 1, is_active: true, base_options: [{ group_name: 'Patty Type', required: true, select_type: 'single', options: [{ name: 'Beef', extra_price: 0 }, { name: 'Chicken', extra_price: 0 }, { name: 'Veggie', extra_price: 0 }] }], topping_groups: [{ group_name: 'Extras', max_selections: 4, options: [{ name: 'Extra Cheese', extra_price: 0.75 }, { name: 'Bacon', extra_price: 1.5 }, { name: 'Avocado', extra_price: 1.0 }, { name: 'Fried Egg', extra_price: 1.0 }, { name: 'Jalapeños', extra_price: 0.5 }] }] },
-// ];
 
 const FAKE_STORE_SETTINGS = {
-  store_name: "JiniPizza",
+  store_name: 'BlazeBites',
   delivery_enabled: true,
   delivery_open_time_ms: 39600000,
   delivery_close_time_ms: 79200000,
@@ -1260,278 +1689,169 @@ const AppContext = createContext(null);
 export function AppProvider({ children }) {
   // Auth state
   const [currentUser, setCurrentUser] = useState(() => {
-    try {
-      return JSON.parse(localStorage.getItem("bb_user")) || null;
-    } catch {
-      return null;
-    }
+    try { return JSON.parse(localStorage.getItem('bb_user')) || null; } catch { return null; }
   });
 
   // Data state (fake, in-memory + localStorage)
   const [cart, setCart] = useState(() => {
-    try {
-      return JSON.parse(localStorage.getItem("bb_cart")) || [];
-    } catch {
-      return [];
-    }
+    try { return JSON.parse(localStorage.getItem('bb_cart')) || []; } catch { return []; }
   });
   const [wishlist, setWishlist] = useState(() => {
-    try {
-      return JSON.parse(localStorage.getItem("bb_wishlist")) || [];
-    } catch {
-      return [];
-    }
+    try { return JSON.parse(localStorage.getItem('bb_wishlist')) || []; } catch { return []; }
   });
   const [orders, setOrders] = useState(() => {
-    try {
-      return JSON.parse(localStorage.getItem("bb_orders")) || [];
-    } catch {
-      return [];
-    }
+    try { return JSON.parse(localStorage.getItem('bb_orders')) || []; } catch { return []; }
   });
   const [products, setProducts] = useState(FAKE_PRODUCTS);
   const [categories, setCategories] = useState(FAKE_CATEGORIES);
   const [subCategories, setSubCategories] = useState(FAKE_SUBCATEGORIES);
   const [storeSettings, setStoreSettings] = useState(FAKE_STORE_SETTINGS);
   const [groupOrders, setGroupOrders] = useState(() => {
-    try {
-      return JSON.parse(localStorage.getItem("bb_groups")) || [];
-    } catch {
-      return [];
-    }
+    try { return JSON.parse(localStorage.getItem('bb_groups')) || []; } catch { return []; }
+  });
+  const [rewards, setRewards] = useState(() => {
+    try { return JSON.parse(localStorage.getItem('bb_rewards')) || { points: 0, history: [] }; } catch { return { points: 0, history: [] }; }
+  });
+  const [reviews, setReviews] = useState(() => {
+    try { return JSON.parse(localStorage.getItem('bb_reviews')) || []; } catch { return []; }
   });
 
   // Persist to localStorage
-  useEffect(() => {
-    localStorage.setItem("bb_cart", JSON.stringify(cart));
-  }, [cart]);
-  useEffect(() => {
-    localStorage.setItem("bb_wishlist", JSON.stringify(wishlist));
-  }, [wishlist]);
-  useEffect(() => {
-    localStorage.setItem("bb_orders", JSON.stringify(orders));
-  }, [orders]);
-  useEffect(() => {
-    if (currentUser)
-      localStorage.setItem("bb_user", JSON.stringify(currentUser));
-    else localStorage.removeItem("bb_user");
-  }, [currentUser]);
-  useEffect(() => {
-    localStorage.setItem("bb_groups", JSON.stringify(groupOrders));
-  }, [groupOrders]);
+  useEffect(() => { localStorage.setItem('bb_cart', JSON.stringify(cart)); }, [cart]);
+  useEffect(() => { localStorage.setItem('bb_wishlist', JSON.stringify(wishlist)); }, [wishlist]);
+  useEffect(() => { localStorage.setItem('bb_orders', JSON.stringify(orders)); }, [orders]);
+  useEffect(() => { if (currentUser) localStorage.setItem('bb_user', JSON.stringify(currentUser)); else localStorage.removeItem('bb_user'); }, [currentUser]);
+  useEffect(() => { localStorage.setItem('bb_groups', JSON.stringify(groupOrders)); }, [groupOrders]);
+  useEffect(() => { localStorage.setItem('bb_rewards', JSON.stringify(rewards)); }, [rewards]);
+  useEffect(() => { localStorage.setItem('bb_reviews', JSON.stringify(reviews)); }, [reviews]);
 
   // ── Auth ───────────────────────────────────────────────────────────────────
   const login = (email, password) => {
     // Fake auth — admin if email contains 'admin'
-    const user = {
-      id: "u1",
-      email,
-      name: email.split("@")[0],
-      role: email.includes("admin") ? "admin" : "user",
-    };
+    const user = { id: 'u1', email, name: email.split('@')[0], role: email.includes('admin') ? 'admin' : 'user' };
     setCurrentUser(user);
     return user;
   };
   const signup = (name, email, password) => {
-    const user = { id: "u" + Date.now(), email, name, role: "user" };
+    const user = { id: 'u' + Date.now(), email, name, role: 'user' };
     setCurrentUser(user);
     return user;
   };
-  const logout = () => {
-    setCurrentUser(null);
-    setCart([]);
-    setWishlist([]);
-  };
+  const logout = () => { setCurrentUser(null); setCart([]); setWishlist([]); };
 
   // ── Cart ───────────────────────────────────────────────────────────────────
   const addToCart = (product, qty = 1) => {
-    setCart((prev) => {
-      const existing = prev.find((i) => i.product_id === product.id);
-      if (existing)
-        return prev.map((i) =>
-          i.product_id === product.id
-            ? { ...i, quantity: i.quantity + qty }
-            : i,
-        );
-      return [
-        ...prev,
-        {
-          id: "ci" + Date.now(),
-          product_id: product.id,
-          product_name: product.name,
-          product_image: product.image_url,
-          price: product.price,
-          quantity: qty,
-        },
-      ];
+    setCart(prev => {
+      const existing = prev.find(i => i.product_id === product.id);
+      if (existing) return prev.map(i => i.product_id === product.id ? { ...i, quantity: i.quantity + qty } : i);
+      return [...prev, { id: 'ci' + Date.now(), product_id: product.id, product_name: product.name, product_image: product.image_url, price: product.price, quantity: qty }];
     });
   };
   const addCustomToCart = (item) => {
-    setCart((prev) => [...prev, { id: "ci" + Date.now(), ...item }]);
+    setCart(prev => [...prev, { id: 'ci' + Date.now(), ...item }]);
   };
-  const updateCartQty = (id, qty) =>
-    setCart((prev) =>
-      prev.map((i) => (i.id === id ? { ...i, quantity: qty } : i)),
-    );
-  const removeFromCart = (id) =>
-    setCart((prev) => prev.filter((i) => i.id !== id));
+  const updateCartQty = (id, qty) => setCart(prev => prev.map(i => i.id === id ? { ...i, quantity: qty } : i));
+  const removeFromCart = (id) => setCart(prev => prev.filter(i => i.id !== id));
   const clearCart = () => setCart([]);
 
   // ── Wishlist ───────────────────────────────────────────────────────────────
   const toggleWishlist = (product) => {
-    setWishlist((prev) => {
-      const exists = prev.find((w) => w.product_id === product.id);
-      if (exists) return prev.filter((w) => w.product_id !== product.id);
-      return [
-        ...prev,
-        {
-          id: "wi" + Date.now(),
-          product_id: product.id,
-          product_name: product.name,
-          product_image: product.image_url,
-          price: product.price,
-          category: product.category,
-        },
-      ];
+    setWishlist(prev => {
+      const exists = prev.find(w => w.product_id === product.id);
+      if (exists) return prev.filter(w => w.product_id !== product.id);
+      return [...prev, { id: 'wi' + Date.now(), product_id: product.id, product_name: product.name, product_image: product.image_url, price: product.price, category: product.category }];
     });
   };
-  const isWishlisted = (productId) =>
-    wishlist.some((w) => w.product_id === productId);
+  const isWishlisted = (productId) => wishlist.some(w => w.product_id === productId);
 
   // ── Orders ─────────────────────────────────────────────────────────────────
   const placeOrder = (orderData) => {
-    const newOrder = {
-      id: "ord" + Date.now(),
-      created_date: new Date().toISOString(),
-      status: "pending",
-      ...orderData,
-    };
-    setOrders((prev) => [newOrder, ...prev]);
+    const newOrder = { id: 'ord' + Date.now(), created_date: new Date().toISOString(), status: 'pending', ...orderData };
+    setOrders(prev => [newOrder, ...prev]);
+    // Earn points: 1 pt per $1 spent (rounded)
+    const earnedPts = Math.floor(orderData.total || 0);
+    if (earnedPts > 0) {
+      setRewards(prev => ({
+        points: prev.points + earnedPts,
+        history: [{ label: `Order #${newOrder.id.slice(-6)}`, pts: earnedPts, date: new Date().toLocaleDateString() }, ...prev.history],
+      }));
+    }
     clearCart();
     return newOrder;
   };
-  const updateOrderStatus = (orderId, status) =>
-    setOrders((prev) =>
-      prev.map((o) => (o.id === orderId ? { ...o, status } : o)),
-    );
+  const updateOrderStatus = (orderId, status) => setOrders(prev => prev.map(o => o.id === orderId ? { ...o, status } : o));
 
   // ── Products (admin) ───────────────────────────────────────────────────────
-  const createProduct = (data) => {
-    const p = { ...data, id: "p" + Date.now() };
-    setProducts((prev) => [...prev, p]);
-    return p;
-  };
-  const updateProduct = (id, data) =>
-    setProducts((prev) =>
-      prev.map((p) => (p.id === id ? { ...p, ...data } : p)),
-    );
-  const deleteProduct = (id) =>
-    setProducts((prev) => prev.filter((p) => p.id !== id));
+  const createProduct = (data) => { const p = { ...data, id: 'p' + Date.now() }; setProducts(prev => [...prev, p]); return p; };
+  const updateProduct = (id, data) => setProducts(prev => prev.map(p => p.id === id ? { ...p, ...data } : p));
+  const deleteProduct = (id) => setProducts(prev => prev.filter(p => p.id !== id));
 
   // ── Categories (admin) ─────────────────────────────────────────────────────
-  const createCategory = (data) => {
-    const c = { ...data, id: "cat" + Date.now() };
-    setCategories((prev) => [...prev, c]);
-    return c;
-  };
-  const updateCategory = (id, data) =>
-    setCategories((prev) =>
-      prev.map((c) => (c.id === id ? { ...c, ...data } : c)),
-    );
-  const deleteCategory = (id) =>
-    setCategories((prev) => prev.filter((c) => c.id !== id));
+  const createCategory = (data) => { const c = { ...data, id: 'cat' + Date.now() }; setCategories(prev => [...prev, c]); return c; };
+  const updateCategory = (id, data) => setCategories(prev => prev.map(c => c.id === id ? { ...c, ...data } : c));
+  const deleteCategory = (id) => setCategories(prev => prev.filter(c => c.id !== id));
 
   // ── SubCategories (admin) ──────────────────────────────────────────────────
-  const createSubCategory = (data) => {
-    const s = { ...data, id: "sub" + Date.now() };
-    setSubCategories((prev) => [...prev, s]);
-    return s;
-  };
-  const updateSubCategory = (id, data) =>
-    setSubCategories((prev) =>
-      prev.map((s) => (s.id === id ? { ...s, ...data } : s)),
-    );
-  const deleteSubCategory = (id) =>
-    setSubCategories((prev) => prev.filter((s) => s.id !== id));
+  const createSubCategory = (data) => { const s = { ...data, id: 'sub' + Date.now() }; setSubCategories(prev => [...prev, s]); return s; };
+  const updateSubCategory = (id, data) => setSubCategories(prev => prev.map(s => s.id === id ? { ...s, ...data } : s));
+  const deleteSubCategory = (id) => setSubCategories(prev => prev.filter(s => s.id !== id));
 
   // ── Store settings (admin) ─────────────────────────────────────────────────
   const saveStoreSettings = (data) => setStoreSettings(data);
 
   // ── Group orders ───────────────────────────────────────────────────────────
-  const createGroupOrder = (data) => {
-    const g = {
-      ...data,
-      id: "grp" + Date.now(),
-      created_date: new Date().toISOString(),
-    };
-    setGroupOrders((prev) => [g, ...prev]);
-    return g;
+  const createGroupOrder = (data) => { const g = { ...data, id: 'grp' + Date.now(), created_date: new Date().toISOString() }; setGroupOrders(prev => [g, ...prev]); return g; };
+  const updateGroupOrder = (id, data) => { let updated; setGroupOrders(prev => prev.map(g => { if (g.id === id) { updated = { ...g, ...data }; return updated; } return g; })); return updated; };
+  const findGroupByCode = (code) => groupOrders.find(g => g.share_code === code.toUpperCase());
+
+  // ── Rewards ────────────────────────────────────────────────────────────────
+  const redeemReward = (reward) => {
+    if (rewards.points < reward.points) return;
+    setRewards(prev => ({
+      points: prev.points - reward.points,
+      history: [{ label: `Redeemed: ${reward.name}`, pts: -reward.points, date: new Date().toLocaleDateString() }, ...prev.history],
+    }));
   };
-  const updateGroupOrder = (id, data) => {
-    let updated;
-    setGroupOrders((prev) =>
-      prev.map((g) => {
-        if (g.id === id) {
-          updated = { ...g, ...data };
-          return updated;
-        }
-        return g;
-      }),
-    );
-    return updated;
+  const applyRewardDiscount = (discountAmt) => {
+    // Called from checkout when redeeming points for discount
   };
-  const findGroupByCode = (code) =>
-    groupOrders.find((g) => g.share_code === code.toUpperCase());
+
+  // ── Reviews ────────────────────────────────────────────────────────────────
+  const addReview = (reviewData) => {
+    setReviews(prev => [{ id: 'rev' + Date.now(), ...reviewData }, ...prev]);
+  };
+  const getProductRating = (productId) => {
+    const pReviews = reviews.filter(r => r.product_id === productId);
+    if (pReviews.length === 0) return null;
+    return { avg: pReviews.reduce((s, r) => s + r.rating, 0) / pReviews.length, count: pReviews.length };
+  };
 
   const cartCount = cart.reduce((s, i) => s + (i.quantity || 1), 0);
 
   return (
-    <AppContext.Provider
-      value={{
-        // Auth
-        currentUser,
-        login,
-        signup,
-        logout,
-        // Cart
-        cart,
-        cartCount,
-        addToCart,
-        addCustomToCart,
-        updateCartQty,
-        removeFromCart,
-        clearCart,
-        // Wishlist
-        wishlist,
-        toggleWishlist,
-        isWishlisted,
-        // Orders
-        orders,
-        placeOrder,
-        updateOrderStatus,
-        // Data
-        products,
-        categories,
-        subCategories,
-        storeSettings,
-        // Admin
-        createProduct,
-        updateProduct,
-        deleteProduct,
-        createCategory,
-        updateCategory,
-        deleteCategory,
-        createSubCategory,
-        updateSubCategory,
-        deleteSubCategory,
-        saveStoreSettings,
-        // Group
-        groupOrders,
-        createGroupOrder,
-        updateGroupOrder,
-        findGroupByCode,
-      }}
-    >
+    <AppContext.Provider value={{
+      // Auth
+      currentUser, login, signup, logout,
+      // Cart
+      cart, cartCount, addToCart, addCustomToCart, updateCartQty, removeFromCart, clearCart,
+      // Wishlist
+      wishlist, toggleWishlist, isWishlisted,
+      // Orders
+      orders, placeOrder, updateOrderStatus,
+      // Data
+      products, categories, subCategories, storeSettings,
+      // Admin
+      createProduct, updateProduct, deleteProduct,
+      createCategory, updateCategory, deleteCategory,
+      createSubCategory, updateSubCategory, deleteSubCategory,
+      saveStoreSettings,
+      // Group
+      groupOrders, createGroupOrder, updateGroupOrder, findGroupByCode,
+      // Rewards
+      rewards, redeemReward,
+      // Reviews
+      reviews, addReview, getProductRating,
+    }}>
       {children}
     </AppContext.Provider>
   );
@@ -1539,6 +1859,6 @@ export function AppProvider({ children }) {
 
 export const useApp = () => {
   const ctx = useContext(AppContext);
-  if (!ctx) throw new Error("useApp must be used inside AppProvider");
+  if (!ctx) throw new Error('useApp must be used inside AppProvider');
   return ctx;
 };

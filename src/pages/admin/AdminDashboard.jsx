@@ -23,9 +23,9 @@ export default function AdminDashboard() {
   const pendingOrders = orders.filter(o => ['pending', 'confirmed', 'preparing'].includes(o.status)).length;
 
   return (
-    <div className="p-6">
+    <div className="p-4 sm:p-6">
       <h1 className="font-heading text-2xl font-bold mb-6">Overview</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-8">
         <StatCard title="Total Revenue" value={`$${totalRevenue.toFixed(2)}`} icon={DollarSign} colorClass="bg-green-100 text-green-700" delay={0} />
         <StatCard title="Total Orders" value={orders.length} icon={ShoppingBag} colorClass="bg-blue-100 text-blue-700" delay={0.05} />
         <StatCard title="Pending Orders" value={pendingOrders} icon={Package} colorClass="bg-orange-100 text-orange-700" delay={0.1} />

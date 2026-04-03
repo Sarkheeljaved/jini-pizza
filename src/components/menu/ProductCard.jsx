@@ -1,18 +1,33 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Heart, ShoppingCart, Clock, Flame as FlameIcon, Star } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { toast } from 'sonner';
+import React from "react";
+import { motion } from "framer-motion";
+import {
+  Heart,
+  ShoppingCart,
+  Clock,
+  Flame as FlameIcon,
+  Star,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { toast } from "sonner";
+import { Link } from "react-router-dom";
+import { useApp } from "@/context/AppContext";
 
 const spiceColors = {
-  mild: 'bg-green-100 text-green-700',
-  medium: 'bg-yellow-100 text-yellow-700',
-  hot: 'bg-orange-100 text-orange-700',
-  extra_hot: 'bg-red-100 text-red-700',
+  mild: "bg-green-100 text-green-700",
+  medium: "bg-yellow-100 text-yellow-700",
+  hot: "bg-orange-100 text-orange-700",
+  extra_hot: "bg-red-100 text-red-700",
 };
 
-export default function ProductCard({ product, onAddToCart, onToggleWishlist, isWishlisted }) {
+export default function ProductCard({
+  product,
+  onAddToCart,
+  onToggleWishlist,
+  isWishlisted,
+}) {
+  const { getProductRating } = useApp();
+  const rating = getProductRating(product.id);
   return (
     <motion.div
       layout
@@ -42,11 +57,11 @@ export default function ProductCard({ product, onAddToCart, onToggleWishlist, is
           onClick={() => onToggleWishlist(product)}
           className={`absolute top-3 right-3 w-9 h-9 rounded-full flex items-center justify-center backdrop-blur-sm transition-colors ${
             isWishlisted
-              ? 'bg-primary text-primary-foreground'
-              : 'bg-card/80 text-foreground hover:bg-primary hover:text-primary-foreground'
+              ? "bg-primary text-primary-foreground"
+              : "bg-card/80 text-foreground hover:bg-primary hover:text-primary-foreground"
           }`}
         >
-          <Heart className={`w-4 h-4 ${isWishlisted ? 'fill-current' : ''}`} />
+          <Heart className={`w-4 h-4 ${isWishlisted ? "fill-current" : ""}`} />
         </motion.button>
 
         {/* Featured badge */}
@@ -66,23 +81,51 @@ export default function ProductCard({ product, onAddToCart, onToggleWishlist, is
 
       {/* Content */}
       <div className="p-4">
-        <div className="flex items-start justify-between gap-2 mb-2">
-          <h3 className="font-heading font-semibold text-lg leading-tight">{product.name}</h3>
+        <div className="flex items-start justify-between gap-2 mb-1">
+          <Link
+            to={`/product/${product.id}`}
+            className="font-heading font-semibold text-lg leading-tight hover:text-primary transition-colors"
+          >
+            {product.name}
+          </Link>
           <span className="font-heading font-bold text-primary text-lg whitespace-nowrap">
             ${product.price?.toFixed(2)}
           </span>
         </div>
+        {rating && (
+          <div className="flex items-center gap-1.5 mb-1">
+            <div className="flex">
+              {[1, 2, 3, 4, 5].map((s) => (
+                <Star
+                  key={s}
+                  className={`w-3.5 h-3.5 ${s <= Math.round(rating.avg) ? "fill-yellow-400 text-yellow-400" : "text-muted-foreground/20"}`}
+                />
+              ))}
+            </div>
+            <span className="text-xs font-semibold">
+              {rating.avg.toFixed(1)}
+            </span>
+            <span className="text-xs text-muted-foreground">
+              ({rating.count})
+            </span>
+          </div>
+        )}
 
         {product.description && (
-          <p className="text-muted-foreground text-sm mb-3 line-clamp-2">{product.description}</p>
+          <p className="text-muted-foreground text-sm mb-3 line-clamp-2">
+            {product.description}
+          </p>
         )}
 
         {/* Meta info */}
         <div className="flex items-center gap-2 mb-4 flex-wrap">
           {product.spice_level && (
-            <Badge variant="secondary" className={spiceColors[product.spice_level]}>
+            <Badge
+              variant="secondary"
+              className={spiceColors[product.spice_level]}
+            >
               <FlameIcon className="w-3 h-3 mr-1" />
-              {product.spice_level.replace('_', ' ')}
+              {product.spice_level.replace("_", " ")}
             </Badge>
           )}
           {product.prep_time_mins && (

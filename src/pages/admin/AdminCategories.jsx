@@ -32,7 +32,7 @@ export default function AdminCategories() {
   };
 
   return (
-    <div className="p-6">
+    <div className="p-4 sm:p-6">
       <div className="flex items-center justify-between mb-6">
         <h2 className="font-heading text-xl font-bold">Menu Categories</h2>
         <Button onClick={openCreate} className="gap-2"><Plus className="w-4 h-4" />Add Category</Button>

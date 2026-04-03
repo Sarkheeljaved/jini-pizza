@@ -12,7 +12,7 @@ export default function AdminGroupOrders() {
   const copyCode = (code) => { navigator.clipboard.writeText(code); toast.success('Code copied!'); };
 
   return (
-    <div className="p-6">
+    <div className="p-4 sm:p-6">
       <h2 className="font-heading text-xl font-bold mb-6">Group Orders ({groupOrders.length})</h2>
 
       {groupOrders.length === 0 ? (
@@ -24,14 +24,14 @@ export default function AdminGroupOrders() {
         <div className="space-y-4">
           {groupOrders.map(group => (
             <div key={group.id} className="bg-card rounded-2xl border border-border p-5">
-              <div className="flex items-center justify-between mb-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
                 <div>
                   <h3 className="font-heading font-bold text-lg">{group.name}</h3>
                   <p className="text-sm text-muted-foreground">Host: {group.host_name} · {group.order_type}</p>
                   {group.created_date && <p className="text-xs text-muted-foreground mt-0.5">{format(new Date(group.created_date), 'MMM d, yyyy h:mm a')}</p>}
                 </div>
-                <div className="flex items-center gap-3">
-                  <div className="text-right">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <div>
                     <p className="text-xs text-muted-foreground">Share Code</p>
                     <p className="font-mono font-bold text-xl text-primary tracking-widest">{group.share_code}</p>
                   </div>

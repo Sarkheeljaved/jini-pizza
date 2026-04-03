@@ -15,7 +15,7 @@ export default function AdminOrders() {
   const { orders, updateOrderStatus } = useApp();
 
   return (
-    <div className="p-6">
+    <div className="p-4 sm:p-6">
       <h2 className="font-heading text-xl font-bold mb-6">All Orders ({orders.length})</h2>
       <div className="bg-card rounded-2xl border border-border overflow-hidden">
         <div className="overflow-x-auto">

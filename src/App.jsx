@@ -20,6 +20,9 @@ import GroupOrderPage from '@/pages/GroupOrderPage';
 import CategoryPage from '@/pages/CategoryPage';
 import ProductCustomizerPage from '@/pages/ProductCustomizerPage';
 import InvoicePage from '@/pages/InvoicePage';
+import TrackOrderPage from '@/pages/TrackOrderPage';
+import RewardsPage from '@/pages/RewardsPage';
+import ProductDetailPage from '@/pages/ProductDetailPage';
 
 import LoginPage from '@/pages/auth/LoginPage';
 import SignupPage from '@/pages/auth/SignupPage';
@@ -49,21 +52,6 @@ function RequireAdmin({ children }) {
 }
 
 const AuthenticatedApp = () => {
-  const { isLoadingAuth, isLoadingPublicSettings, authError, navigateToLogin } = useAuth();
-
-  if (isLoadingPublicSettings || isLoadingAuth) {
-    return (
-      <div className="fixed inset-0 flex items-center justify-center">
-        <div className="w-8 h-8 border-4 border-slate-200 border-t-slate-800 rounded-full animate-spin"></div>
-      </div>
-    );
-  }
-
-  if (authError) {
-    if (authError.type === 'user_not_registered') return <UserNotRegisteredError />;
-    if (authError.type === 'auth_required') { navigateToLogin(); return null; }
-  }
-
   return (
     <Routes>
       {/* Auth pages (public) */}
@@ -82,6 +70,9 @@ const AuthenticatedApp = () => {
         <Route path="/category/:categoryId" element={<RequireAuth><CategoryPage /></RequireAuth>} />
         <Route path="/category/:categoryId/item/:itemId" element={<RequireAuth><ProductCustomizerPage /></RequireAuth>} />
         <Route path="/invoice/:orderId" element={<RequireAuth><InvoicePage /></RequireAuth>} />
+        <Route path="/track/:orderId" element={<RequireAuth><TrackOrderPage /></RequireAuth>} />
+        <Route path="/rewards" element={<RequireAuth><RewardsPage /></RequireAuth>} />
+        <Route path="/product/:productId" element={<RequireAuth><ProductDetailPage /></RequireAuth>} />
       </Route>
 
       {/* Admin (require admin role) */}
