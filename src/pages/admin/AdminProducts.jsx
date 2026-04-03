@@ -78,8 +78,8 @@ export default function AdminProducts() {
               <div><Label>Category</Label><Select value={form.category} onValueChange={v => set('category', v)}><SelectTrigger className="mt-1.5"><SelectValue /></SelectTrigger><SelectContent>{categories.map(c => <SelectItem key={c} value={c} className="capitalize">{c}</SelectItem>)}</SelectContent></Select></div>
             </div>
             <div><Label>Image URL</Label><Input value={form.image_url} onChange={e => set('image_url', e.target.value)} placeholder="https://..." className="mt-1.5" /></div>
-            <div className="grid grid-cols-3 gap-4">
-              <div><Label>Spice Level</Label><Select value={form.spice_level} onValueChange={v => set('spice_level', v)}><SelectTrigger className="mt-1.5"><SelectValue placeholder="None" /></SelectTrigger><SelectContent>{spiceLevels.map(s => <SelectItem key={s} value={s} className="capitalize">{s.replace('_', ' ')}</SelectItem>)}</SelectContent></Select></div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+              <div className="col-span-2 sm:col-span-1"><Label>Spice Level</Label><Select value={form.spice_level} onValueChange={v => set('spice_level', v)}><SelectTrigger className="mt-1.5"><SelectValue placeholder="None" /></SelectTrigger><SelectContent>{spiceLevels.map(s => <SelectItem key={s} value={s} className="capitalize">{s.replace('_', ' ')}</SelectItem>)}</SelectContent></Select></div>
               <div><Label>Calories</Label><Input type="number" value={form.calories} onChange={e => set('calories', e.target.value)} className="mt-1.5" /></div>
               <div><Label>Prep (mins)</Label><Input type="number" value={form.prep_time_mins} onChange={e => set('prep_time_mins', e.target.value)} className="mt-1.5" /></div>
             </div>

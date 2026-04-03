@@ -17,7 +17,36 @@ export default function AdminOrders() {
   return (
     <div className="p-4 sm:p-6">
       <h2 className="font-heading text-xl font-bold mb-6">All Orders ({orders.length})</h2>
-      <div className="bg-card rounded-2xl border border-border overflow-hidden">
+
+      {/* Mobile card list */}
+      <div className="sm:hidden space-y-3">
+        {orders.length === 0 && <div className="text-center py-12 text-muted-foreground">No orders yet</div>}
+        {orders.map(order => (
+          <div key={order.id} className="bg-card rounded-2xl border border-border p-4 space-y-3">
+            <div className="flex items-start justify-between gap-2">
+              <div>
+                <p className="font-mono font-bold text-sm">#{order.id?.slice(-6)}</p>
+                <p className="text-xs text-muted-foreground">{order.created_date && format(new Date(order.created_date), 'MMM d, h:mm a')}</p>
+              </div>
+              <span className={`px-2 py-0.5 rounded-full text-xs font-medium capitalize ${statusColors[order.status]}`}>{order.status}</span>
+            </div>
+            <div className="flex items-center justify-between text-sm">
+              <div>
+                <p className="font-medium">{order.customer_name}</p>
+                <p className="text-xs text-muted-foreground capitalize">{order.order_type?.replace('_', ' ')} · {order.items?.length} items · {order.payment_method}</p>
+              </div>
+              <p className="font-bold text-primary">${order.total?.toFixed(2)}</p>
+            </div>
+            <Select value={order.status} onValueChange={(status) => { updateOrderStatus(order.id, status); toast.success('Status updated'); }}>
+              <SelectTrigger className={`w-full h-8 text-xs font-medium ${statusColors[order.status]}`}><SelectValue /></SelectTrigger>
+              <SelectContent>{statuses.map(s => <SelectItem key={s} value={s} className="capitalize">{s}</SelectItem>)}</SelectContent>
+            </Select>
+          </div>
+        ))}
+      </div>
+
+      {/* Desktop table */}
+      <div className="hidden sm:block bg-card rounded-2xl border border-border overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead className="bg-muted/50">

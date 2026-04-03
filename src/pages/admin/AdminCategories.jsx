@@ -53,11 +53,15 @@ export default function AdminCategories() {
                 </div>
                 {cat.description && <p className="text-sm text-muted-foreground">{cat.description}</p>}
               </div>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1 flex-shrink-0">
                 <Button variant="ghost" size="sm" onClick={() => openEdit(cat)}><Pencil className="w-3 h-3" /></Button>
                 <Button variant="ghost" size="sm" className="text-destructive" onClick={() => { deleteCategory(cat.id); toast.success('Deleted'); }}><Trash2 className="w-3 h-3" /></Button>
-                <Button variant="ghost" size="sm" onClick={() => setExpandedCat(expandedCat === cat.id ? null : cat.id)}>
-                  {expandedCat === cat.id ? <ChevronDown className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />} Sub-items
+                <Button variant="ghost" size="sm" onClick={() => setExpandedCat(expandedCat === cat.id ? null : cat.id)} className="hidden xs:flex sm:flex">
+                  {expandedCat === cat.id ? <ChevronDown className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
+                  <span className="hidden sm:inline ml-1">Sub-items</span>
+                </Button>
+                <Button variant="ghost" size="sm" onClick={() => setExpandedCat(expandedCat === cat.id ? null : cat.id)} className="sm:hidden">
+                  {expandedCat === cat.id ? <ChevronDown className="w-4 h-4" /> : <ChevronRight className="w-4 h-4" />}
                 </Button>
               </div>
             </div>

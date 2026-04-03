@@ -34,7 +34,27 @@ export default function AdminDashboard() {
 
       <div className="bg-card rounded-2xl border border-border overflow-hidden">
         <div className="p-5 border-b border-border"><h3 className="font-heading font-bold text-lg">Recent Orders</h3></div>
-        <div className="overflow-x-auto">
+
+        {/* Mobile cards */}
+        <div className="sm:hidden divide-y divide-border">
+          {orders.length === 0 && <p className="text-center py-8 text-muted-foreground">No orders yet</p>}
+          {orders.slice(0, 10).map(order => (
+            <div key={order.id} className="p-4 flex items-center justify-between gap-3">
+              <div>
+                <p className="font-mono text-sm font-medium">#{order.id?.slice(-6)}</p>
+                <p className="text-sm">{order.customer_name}</p>
+                <p className="text-xs text-muted-foreground">{order.created_date && format(new Date(order.created_date), 'MMM d, h:mm a')} · {order.items?.length} items</p>
+              </div>
+              <div className="text-right flex-shrink-0">
+                <p className="font-semibold text-sm">${order.total?.toFixed(2)}</p>
+                <span className={`px-2 py-0.5 rounded-full text-xs font-medium capitalize ${order.status === 'delivered' ? 'bg-green-100 text-green-700' : order.status === 'cancelled' ? 'bg-red-100 text-red-700' : 'bg-yellow-100 text-yellow-700'}`}>{order.status}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Desktop table */}
+        <div className="hidden sm:block overflow-x-auto">
           <table className="w-full">
             <thead className="bg-muted/50">
               <tr>
